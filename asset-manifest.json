@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/aegis-of-the-renren/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/aegis-of-the-renren/static/js/main.73d610e6.chunk.js",
+    "main.js.map": "/aegis-of-the-renren/static/js/main.73d610e6.chunk.js.map",
+    "runtime-main.js": "/aegis-of-the-renren/static/js/runtime-main.b503d599.js",
+    "runtime-main.js.map": "/aegis-of-the-renren/static/js/runtime-main.b503d599.js.map",
+    "static/js/2.7ec3cf22.chunk.js": "/aegis-of-the-renren/static/js/2.7ec3cf22.chunk.js",
+    "static/js/2.7ec3cf22.chunk.js.map": "/aegis-of-the-renren/static/js/2.7ec3cf22.chunk.js.map",
+    "static/js/3.fc31a944.chunk.js": "/aegis-of-the-renren/static/js/3.fc31a944.chunk.js",
+    "static/js/3.fc31a944.chunk.js.map": "/aegis-of-the-renren/static/js/3.fc31a944.chunk.js.map",
+    "index.html": "/aegis-of-the-renren/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/aegis-of-the-renren/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.7ec3cf22.chunk.js.LICENSE.txt": "/aegis-of-the-renren/static/js/2.7ec3cf22.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/aegis-of-the-renren/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b503d599.js",
+    "static/js/2.7ec3cf22.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.73d610e6.chunk.js"
+  ]
+}
