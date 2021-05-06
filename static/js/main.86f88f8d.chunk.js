@@ -1,0 +1,2 @@
+(this["webpackJsonpaegis-of-the-renren"]=this["webpackJsonpaegis-of-the-renren"]||[]).push([[0],{10:function(e,n,t){"use strict";t.r(n);var r=t(1),c=t.n(r),i=t(3),s=t.n(i),o=t(0);function h(){return Object(o.jsx)("div",{children:Object(o.jsx)("h1",{children:"Aegis Of The RenRen"})})}function j(){return Object(o.jsx)(h,{})}t(9);s.a.render(Object(o.jsx)(c.a.StrictMode,{children:Object(o.jsx)(j,{})}),document.getElementById("root"))},9:function(e,n,t){}},[[10,1,2]]]);
+//# sourceMappingURL=main.86f88f8d.chunk.js.map
