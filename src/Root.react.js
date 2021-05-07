@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 - The Immortals
+ * Copyright (c) 2021 - The Millennials
  *
  * Aegis Of The RenRen
  *
@@ -7,17 +7,35 @@
  */
 
 import React from "react";
+import { RecoilRoot } from "recoil";
+import { BrowserRouter as Router } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import App from "./app/App.react";
 
 /**
- * Project Overview
+ * External Dependencies
  *
+ * + Material-UI
+ *   - @usage: UI framework & design system
+ *   - @link: https://material-ui.com/
+ * + React Router
+ *   - @usage: browser rounting & navigation
+ *   - @link: https://reactrouter.com/
  * + Recoil
- *   - @usage: state management
+ *   - @usage: app state management & control
  *   - @link: https://recoiljs.org/
  */
 
 export default function Root() {
-  return <App />;
+  return (
+    <>
+      <CssBaseline />
+      <Router>
+        <RecoilRoot>
+          <App />
+        </RecoilRoot>
+      </Router>
+    </>
+  );
 }
