@@ -10,17 +10,12 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { styleNoUserDragOrSelect } from "../common/DivNoUserDragOrSelect.react";
+
 import logo from "../../assets/logo.jpg";
 
-const useStyles = makeStyles((theme) => ({
-  img: {
-    MozUserSelect: "none",
-    msUserSelect: "none",
-    UserDrag: "none",
-    UserSelect: "none",
-    WebkitUserDrag: "none",
-    WebkitUserSelect: "none",
-  },
+export const useStyles = makeStyles((theme) => ({
+  img: styleNoUserDragOrSelect,
 }));
 
 export default function NavBarLogo() {

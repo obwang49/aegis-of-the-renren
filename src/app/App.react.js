@@ -14,46 +14,59 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 
-import { useAppPath } from "../utils/AppPathUtils";
-import { useAppLanguage } from "../utils/AppLanguageUtils";
-
+import { useValueByAppPath } from "../utils/AppPathUtils";
+import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
+import { useAppThemeMode } from "../utils/AppThemeModeUtils";
 import NavBar from "./nav/NavBar.react";
 import HomePage from "./home/HomePage.react";
 
 export const APP_THEME_PALETTE_PRIMARY_MAIN = cyan[900];
-
-const theme = createMuiTheme({
+export const appThemeBase = Object.freeze({
   palette: {
-    primary: { main: APP_THEME_PALETTE_PRIMARY_MAIN },
+    primary: { main: APP_THEME_PALETTE_PRIMARY_MAIN, dark: "#121212" },
     secondary: deepOrange,
-    type: "light",
+    type: "",
   },
   typography: {
-    fontFamily: "Carter One",
+    fontFamily: "",
   },
+});
+export const appThemeTypographyFontFamily = Object.freeze({
+  cn: "ZCOOL KuaiLe",
+  eng: "Carter One",
 });
 
 export default function App() {
-  const appTheme = responsiveFontSizes(theme);
-
-  const appPath = useAppPath();
-  useAppLanguage(); // const appLanguage = useAppLanguage();
+  const appFontFamilyByLanguage = useValueByAppLanguage(
+    appThemeTypographyFontFamily
+  );
+  const { appThemeMode } = useAppThemeMode();
+  const appTheme = responsiveFontSizes(
+    createMuiTheme({
+      ...appThemeBase,
+      palette: {
+        ...appThemeBase.palette,
+        type: appThemeMode,
+      },
+      typography: {
+        ...appThemeBase.typography,
+        fontFamily: appFontFamilyByLanguage,
+      },
+    })
+  );
 
   console.log("!!!");
 
-  const renderAppContent = () => {
-    switch (appPath) {
-      case "home":
-        return <HomePage />;
-      default:
-        return <h1>Aegis Of The RenRen</h1>;
-    }
-  };
+  const appPage = useValueByAppPath({
+    home: <HomePage />,
+    profile: <h1>Aegis Of The Profile</h1>,
+    blog: <h1>Aegis Of The Blog</h1>,
+  });
 
   return (
     <ThemeProvider theme={appTheme}>
       <NavBar />
-      {renderAppContent()}
+      {appPage}
     </ThemeProvider>
   );
 }

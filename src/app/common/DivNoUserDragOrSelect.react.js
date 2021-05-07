@@ -9,23 +9,25 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+export const styleNoUserDragOrSelect = Object.freeze({
+  MozUserSelect: "none",
+  msUserSelect: "none",
+  UserDrag: "none",
+  UserSelect: "none",
+  WebkitUserDrag: "none",
+  WebkitUserSelect: "none",
+});
+
+export const useStyles = makeStyles((theme) => ({
+  div: styleNoUserDragOrSelect,
+}));
+
 type Props = {
   children: ?React.Node,
 };
 
-const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    MozUserSelect: "none",
-    msUserSelect: "none",
-    UserDrag: "none",
-    UserSelect: "none",
-    WebkitUserDrag: "none",
-    WebkitUserSelect: "none",
-  },
-}));
-
 export default function DivNoUserDragOrSelect({ children }: Props) {
   const classes = useStyles();
 
-  return <div className={classes.wrapper}>{children}</div>;
+  return <div className={classes.div}>{children}</div>;
 }

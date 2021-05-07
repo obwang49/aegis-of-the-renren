@@ -20,17 +20,25 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import SvgIcon from "@material-ui/core/SvgIcon";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import Zoom from "@material-ui/core/Zoom";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import GTranslateIcon from "@material-ui/icons/GTranslate";
 
 import {
   AppLanguageOption,
   useAppLanguage,
+  useValueByAppLanguage,
 } from "../../utils/AppLanguageUtils";
 
 import { ReactComponent as AppLanguageCNIcon } from "../../assets/language_cn.svg";
 import { ReactComponent as AppLanguageENGIcon } from "../../assets/language_eng.svg";
+
+const tooltipText = Object.freeze({
+  cn: "更改语言",
+  eng: "Change Language",
+});
 
 const appLanguageMenuItems = Object.freeze({
   cn: {
@@ -51,20 +59,17 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     marginTop: theme.spacing(1),
   },
-  button: {
-    margin: theme.spacing(1),
-  },
 }));
 
 function renderAppLanugageOptionText({ fontFamily, text }: item): React.Node {
+  const textTheme = createMuiTheme({
+    typography: {
+      fontFamily: fontFamily,
+    },
+  });
+
   return (
-    <ThemeProvider
-      theme={createMuiTheme({
-        typography: {
-          fontFamily: fontFamily,
-        },
-      })}
-    >
+    <ThemeProvider theme={textTheme}>
       <Typography noWrap variant="h6">
         {text}
       </Typography>
@@ -107,18 +112,26 @@ export default function NavBarAppLanguageMenu() {
     setMenuAnchorEl(null);
   };
 
+  const tooltipTextByLanguage = useValueByAppLanguage(tooltipText);
+
   return (
     <>
-      <Button
-        className={classes.button}
-        color="inherit"
-        endIcon={<ExpandMoreIcon />}
-        onClick={openMenu}
-        size="large"
-        startIcon={<GTranslateIcon />}
+      <Tooltip
+        arrow
+        placement="bottom"
+        title={tooltipTextByLanguage}
+        TransitionComponent={Zoom}
       >
-        {renderAppLanugageOptionText(appLanguageMenuItems[appLanguage])}
-      </Button>
+        <Button
+          color="inherit"
+          endIcon={<ExpandMoreIcon />}
+          onClick={openMenu}
+          size="large"
+          startIcon={<GTranslateIcon />}
+        >
+          {renderAppLanugageOptionText(appLanguageMenuItems[appLanguage])}
+        </Button>
+      </Tooltip>
       <Menu
         anchorEl={menuAnchorEl}
         anchorOrigin={{

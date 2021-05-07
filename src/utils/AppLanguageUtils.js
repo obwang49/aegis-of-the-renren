@@ -49,3 +49,15 @@ export function useAppLanguage(): {
     setAppLanguage: setAppLanguageURLSearchParam,
   };
 }
+
+export function useValueByAppLanguage({ cn, eng }): mixed {
+  const { appLanguage } = useAppLanguage();
+  switch (appLanguage) {
+    case AppLanguageOption.cn:
+      return cn;
+    case AppLanguageOption.eng:
+      return eng;
+    default:
+      throw new TypeError(`Unsupported language: ${appLanguage}!`);
+  }
+}
