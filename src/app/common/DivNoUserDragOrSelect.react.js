@@ -7,13 +7,14 @@
  */
 
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 
-import logo from "../../assets/logo.jpg";
+type Props = {
+  children: ?React.Node,
+};
 
 const useStyles = makeStyles((theme) => ({
-  img: {
+  wrapper: {
     MozUserSelect: "none",
     msUserSelect: "none",
     UserDrag: "none",
@@ -23,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBarLogo() {
+export default function DivNoUserDragOrSelect({ children }: Props) {
   const classes = useStyles();
 
-  return <Avatar classes={{ img: classes.img }} src={logo} variant="square" />;
+  return <div className={classes.wrapper}>{children}</div>;
 }

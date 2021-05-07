@@ -11,13 +11,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 
+import DivNoUserDragOrSelect from "../common/DivNoUserDragOrSelect.react";
+import NavBarAppLanguageMenu from "./NavBarAppLanguageMenu.react";
 import NavBarLogo from "./NavBarLogo.react";
 import NavBarTitle from "./NavBarTitle.react";
 
 const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
-    marginLeft: "0.5rem",
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -26,13 +28,16 @@ export default function NavBar() {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
-        <NavBarLogo />
-        <div className={classes.title}>
-          <NavBarTitle text="AEGIS OF THE RENREN" />
-        </div>
-        <div>TBD</div>
-      </Toolbar>
+      <DivNoUserDragOrSelect>
+        <Toolbar>
+          <NavBarLogo />
+          <div className={classes.title}>
+            <NavBarTitle text="AEGIS OF THE RENREN" />
+          </div>
+          <NavBarAppLanguageMenu />
+          <div>TBD</div>
+        </Toolbar>
+      </DivNoUserDragOrSelect>
     </AppBar>
   );
 }

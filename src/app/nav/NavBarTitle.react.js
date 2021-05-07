@@ -14,5 +14,9 @@ type Props = {
 };
 
 export default function NavBarTitle({ text }: Props) {
-  return <Typography variant="h3">{text}</Typography>;
+  return (
+    <Typography noWrap variant="h4">
+      {text}
+    </Typography>
+  );
 }

@@ -29,11 +29,7 @@ const theme = createMuiTheme({
     type: "light",
   },
   typography: {
-    // fontFamily: "Carter One",
-    fontFamily: "ZCOOL KuaiLe",
-    h3: {
-      fontFamily: "Carter One",
-    },
+    fontFamily: "Carter One",
   },
 });
 
