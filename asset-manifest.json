@@ -1,20 +1,22 @@
 {
   "files": {
-    "main.css": "/aegis-of-the-renren/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/aegis-of-the-renren/static/js/main.86f88f8d.chunk.js",
-    "main.js.map": "/aegis-of-the-renren/static/js/main.86f88f8d.chunk.js.map",
+    "main.css": "/aegis-of-the-renren/static/css/main.6017089e.chunk.css",
+    "main.js": "/aegis-of-the-renren/static/js/main.05a00df6.chunk.js",
+    "main.js.map": "/aegis-of-the-renren/static/js/main.05a00df6.chunk.js.map",
     "runtime-main.js": "/aegis-of-the-renren/static/js/runtime-main.d537c4a4.js",
     "runtime-main.js.map": "/aegis-of-the-renren/static/js/runtime-main.d537c4a4.js.map",
-    "static/js/2.c509df58.chunk.js": "/aegis-of-the-renren/static/js/2.c509df58.chunk.js",
-    "static/js/2.c509df58.chunk.js.map": "/aegis-of-the-renren/static/js/2.c509df58.chunk.js.map",
+    "static/js/2.4ece64f6.chunk.js": "/aegis-of-the-renren/static/js/2.4ece64f6.chunk.js",
+    "static/js/2.4ece64f6.chunk.js.map": "/aegis-of-the-renren/static/js/2.4ece64f6.chunk.js.map",
     "index.html": "/aegis-of-the-renren/index.html",
-    "static/css/main.6dea0f05.chunk.css.map": "/aegis-of-the-renren/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.c509df58.chunk.js.LICENSE.txt": "/aegis-of-the-renren/static/js/2.c509df58.chunk.js.LICENSE.txt"
+    "static/css/main.6017089e.chunk.css.map": "/aegis-of-the-renren/static/css/main.6017089e.chunk.css.map",
+    "static/js/2.4ece64f6.chunk.js.LICENSE.txt": "/aegis-of-the-renren/static/js/2.4ece64f6.chunk.js.LICENSE.txt",
+    "static/media/cover.d932cb61.png": "/aegis-of-the-renren/static/media/cover.d932cb61.png",
+    "static/media/logo.afd802fa.jpg": "/aegis-of-the-renren/static/media/logo.afd802fa.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.d537c4a4.js",
-    "static/js/2.c509df58.chunk.js",
-    "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.86f88f8d.chunk.js"
+    "static/js/2.4ece64f6.chunk.js",
+    "static/css/main.6017089e.chunk.css",
+    "static/js/main.05a00df6.chunk.js"
   ]
 }
