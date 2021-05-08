@@ -6,7 +6,6 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useEffect } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useAppThemeModeURLSearchParam } from "./AppURLSearchParamUtils";
@@ -52,13 +51,10 @@ export function useAppThemeMode(): {
     appThemeModeURLSearchParam,
     isPrefersDarkMode
   );
-
-  useEffect(() => {
-    if (appThemeMode !== appThemeModeURLSearchParam) {
-      setAppThemeModeURLSearchParam(appThemeMode);
-    }
-  }, [appThemeMode, appThemeModeURLSearchParam, setAppThemeModeURLSearchParam]);
-
+  if (appThemeMode !== appThemeModeURLSearchParam) {
+    setAppThemeModeURLSearchParam(appThemeMode);
+  }
+  
   return {
     appThemeMode,
     setAppThemeMode: setAppThemeModeURLSearchParam,

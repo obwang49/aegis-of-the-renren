@@ -6,9 +6,8 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useEffect } from "react";
-
 import { useAppPathURLSearchParam } from "./AppURLSearchParamUtils";
+import { useRenRenOauthInfo } from "../utils/RenRenOauthUtils";
 
 export type AppPathOptionType = "home" | "profile" | "blog";
 export const AppPathOption = Object.freeze({
@@ -16,18 +15,28 @@ export const AppPathOption = Object.freeze({
   profile: "profile",
   blog: "blog",
 });
-const DEFAULT_APP_PATH_OPTION = AppPathOption.home;
+const DEFAULT_APP_PATH_OPTION_NO_ACCESS_TOKEN = AppPathOption.home;
+const DEFAULT_APP_PATH_OPTION_WITH_ACCESS_TOKEN = AppPathOption.profile;
+const validAppPathOption = Object.freeze({
+  noAccessToken: [AppPathOption.home],
+  withAccessToken: [AppPathOption.profile, AppPathOption.blog],
+});
 
-function getValidAppPathOption(appPath: string): string {
+function getValidAppPathOption(appPath: string, accessToken: string): string {
+  const defaultAppPathOption = accessToken
+    ? DEFAULT_APP_PATH_OPTION_WITH_ACCESS_TOKEN
+    : DEFAULT_APP_PATH_OPTION_NO_ACCESS_TOKEN;
+
   if (!appPath) {
-    return DEFAULT_APP_PATH_OPTION;
+    return defaultAppPathOption;
   }
 
   const appPathLower = appPath.toLowerCase();
-  const isAppPathLowerOptionValid = Object.keys(AppPathOption).includes(
-    appPathLower
-  );
-  return isAppPathLowerOptionValid ? appPathLower : DEFAULT_APP_PATH_OPTION;
+  const appPathValidOptions = accessToken
+    ? validAppPathOption.withAccessToken
+    : validAppPathOption.noAccessToken;
+  const isAppPathLowerOptionValid = appPathValidOptions.includes(appPathLower);
+  return isAppPathLowerOptionValid ? appPathLower : defaultAppPathOption;
 }
 
 export function useAppPath(): {
@@ -39,13 +48,12 @@ export function useAppPath(): {
     setAppPathURLSearchParam,
   } = useAppPathURLSearchParam();
 
-  const appPath = getValidAppPathOption(appPathURLSearchParam);
+  const { accessToken } = useRenRenOauthInfo();
 
-  useEffect(() => {
-    if (appPath !== appPathURLSearchParam) {
-      setAppPathURLSearchParam(appPath);
-    }
-  }, [appPath, appPathURLSearchParam, setAppPathURLSearchParam]);
+  const appPath = getValidAppPathOption(appPathURLSearchParam, accessToken);
+  if (appPath !== appPathURLSearchParam) {
+    setAppPathURLSearchParam(appPath);
+  }
 
   return {
     appPath,

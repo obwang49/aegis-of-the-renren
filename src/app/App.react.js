@@ -17,6 +17,7 @@ import {
 import { useValueByAppPath } from "../utils/AppPathUtils";
 import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
 import { useAppThemeMode } from "../utils/AppThemeModeUtils";
+import { useRenRenOauthResponse } from "../utils/RenRenOauthUtils";
 import HomePage from "./home/HomePage.react";
 import NavBar from "./nav/NavBar.react";
 
@@ -55,12 +56,12 @@ export default function App() {
     })
   );
 
-  console.log("!!!");
+  useRenRenOauthResponse();
 
   const appPage = useValueByAppPath({
+    blog: <h1>Aegis Of The Blog</h1>,
     home: <HomePage />,
     profile: <h1>Aegis Of The Profile</h1>,
-    blog: <h1>Aegis Of The Blog</h1>,
   });
 
   return (

@@ -7,6 +7,7 @@
  */
 
 import React from "react";
+import { CookiesProvider } from "react-cookie";
 import { BrowserRouter as Router } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,6 +20,9 @@ import App from "./app/App.react";
  * + Material-UI
  *   - @usage: UI framework & design system
  *   - @link: https://material-ui.com/
+ * + React Cookie
+ *   - @usage: browser cookie interaction
+ *   - @link: https://www.npmjs.com/package/react-cookie
  * + React Router
  *   - @usage: browser rounting & navigation
  *   - @link: https://reactrouter.com/
@@ -29,13 +33,13 @@ import App from "./app/App.react";
 
 export default function Root() {
   return (
-    <>
-      <CssBaseline />
+    <CookiesProvider>
       <Router>
         <RecoilRoot>
+          <CssBaseline />
           <App />
         </RecoilRoot>
       </Router>
-    </>
+    </CookiesProvider>
   );
 }

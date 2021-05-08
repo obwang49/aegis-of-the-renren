@@ -15,10 +15,14 @@ import { useValueByAppPath } from "../../utils/AppPathUtils";
 
 const titleText = Object.freeze({
   cn: {
+    blog: "日志之守护",
     home: "人人之守护",
+    profile: "个人资料之守护",
   },
   eng: {
+    blog: "AEGIS OF THE BLOG",
     home: "AEGIS OF THE RENREN",
+    profile: "AEGIS OF THE PROFILE",
   },
 });
 

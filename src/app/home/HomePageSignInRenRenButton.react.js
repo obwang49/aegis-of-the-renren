@@ -7,9 +7,11 @@
  */
 
 import React from "react";
+import Link from "@material-ui/core/Link";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useRenRenOauthRequestURL } from "../../utils/RenRenOauthUtils";
 import { styleNoUserDragOrSelect } from "../common/BoxNoUserDragOrSelect.react";
 
 import sign_in from "../../assets/sign_in.png";
@@ -28,9 +30,13 @@ const useStyles = makeStyles((theme) => ({
 export default function HomePageSignInRenRenButton() {
   const classes = useStyles();
 
+  const renrenOauthRequestURL = useRenRenOauthRequestURL();
+
   return (
-    <ButtonBase className={classes.button} focusRipple onClick={() => {}}>
-      <img alt="404" className={classes.img} src={sign_in} />
-    </ButtonBase>
+    <Link href={renrenOauthRequestURL}>
+      <ButtonBase className={classes.button} focusRipple>
+        <img alt="404" className={classes.img} src={sign_in} />
+      </ButtonBase>
+    </Link>
   );
 }

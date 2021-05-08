@@ -6,8 +6,6 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useEffect } from "react";
-
 import { useAppLanguageURLSearchParam } from "./AppURLSearchParamUtils";
 
 export type AppLanguageOptionType = "cn" | "eng";
@@ -41,12 +39,9 @@ export function useAppLanguage(): {
   } = useAppLanguageURLSearchParam();
 
   const appLanguage = getValidAppLanguageOption(appLanguageURLSearchParam);
-
-  useEffect(() => {
-    if (appLanguage !== appLanguageURLSearchParam) {
-      setAppLanguageURLSearchParam(appLanguage);
-    }
-  }, [appLanguage, appLanguageURLSearchParam, setAppLanguageURLSearchParam]);
+  if (appLanguage !== appLanguageURLSearchParam) {
+    setAppLanguageURLSearchParam(appLanguage);
+  }
 
   return {
     appLanguage,
