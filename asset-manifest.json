@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/aegis-of-the-renren/static/css/main.6017089e.chunk.css",
-    "main.js": "/aegis-of-the-renren/static/js/main.a26a71a7.chunk.js",
-    "main.js.map": "/aegis-of-the-renren/static/js/main.a26a71a7.chunk.js.map",
+    "main.js": "/aegis-of-the-renren/static/js/main.581bcd46.chunk.js",
+    "main.js.map": "/aegis-of-the-renren/static/js/main.581bcd46.chunk.js.map",
     "runtime-main.js": "/aegis-of-the-renren/static/js/runtime-main.d537c4a4.js",
     "runtime-main.js.map": "/aegis-of-the-renren/static/js/runtime-main.d537c4a4.js.map",
-    "static/js/2.f9ddc36b.chunk.js": "/aegis-of-the-renren/static/js/2.f9ddc36b.chunk.js",
-    "static/js/2.f9ddc36b.chunk.js.map": "/aegis-of-the-renren/static/js/2.f9ddc36b.chunk.js.map",
+    "static/js/2.737afe0d.chunk.js": "/aegis-of-the-renren/static/js/2.737afe0d.chunk.js",
+    "static/js/2.737afe0d.chunk.js.map": "/aegis-of-the-renren/static/js/2.737afe0d.chunk.js.map",
     "index.html": "/aegis-of-the-renren/index.html",
     "static/css/main.6017089e.chunk.css.map": "/aegis-of-the-renren/static/css/main.6017089e.chunk.css.map",
-    "static/js/2.f9ddc36b.chunk.js.LICENSE.txt": "/aegis-of-the-renren/static/js/2.f9ddc36b.chunk.js.LICENSE.txt",
+    "static/js/2.737afe0d.chunk.js.LICENSE.txt": "/aegis-of-the-renren/static/js/2.737afe0d.chunk.js.LICENSE.txt",
     "static/media/cover.d932cb61.png": "/aegis-of-the-renren/static/media/cover.d932cb61.png",
     "static/media/language_cn.94a91784.svg": "/aegis-of-the-renren/static/media/language_cn.94a91784.svg",
     "static/media/language_eng.923a5cc9.svg": "/aegis-of-the-renren/static/media/language_eng.923a5cc9.svg",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.d537c4a4.js",
-    "static/js/2.f9ddc36b.chunk.js",
+    "static/js/2.737afe0d.chunk.js",
     "static/css/main.6017089e.chunk.css",
-    "static/js/main.a26a71a7.chunk.js"
+    "static/js/main.581bcd46.chunk.js"
   ]
 }
