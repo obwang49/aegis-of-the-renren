@@ -10,8 +10,6 @@ import React from "react";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 
@@ -29,16 +27,7 @@ const steps = Object.freeze({
   ],
 });
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    borderRadius: 50,
-    height: theme.spacing(6),
-  },
-}));
-
 export default function HomePageSignInStepper() {
-  const classes = useStyles();
-
   const stepsByLanguage = useValueByAppLanguage(steps);
 
   return (

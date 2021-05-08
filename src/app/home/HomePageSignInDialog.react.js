@@ -9,7 +9,6 @@
 import React from "react";
 import { useState } from "react";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -18,6 +17,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
+import BoxNoUserDragOrSelect from "../common/BoxNoUserDragOrSelect.react";
 import HomePageSignInButton from "./HomePageSignInButton.react";
 import HomePageSignInRenRenButton from "./HomePageSignInRenRenButton.react";
 import HomePageSignInStepper from "./HomePageSignInStepper.react";
@@ -28,7 +28,7 @@ const titleText = Object.freeze({
 });
 
 const summaryText = Object.freeze({
-  cn: "请按照以下步骤登录您的人人账号以访问个人数据",
+  cn: "请依照以下步骤登录您的人人账号以访问个人数据",
   eng:
     "Please follow the steps below to sign in to your renren.com account, " +
     "in order to access your personal data.",
@@ -63,14 +63,16 @@ export default function HomePageSignInDialog() {
     <Box className={classes.box}>
       <HomePageSignInButton onClick={toggleDiaglog} />
       <Dialog onClose={toggleDiaglog} open={isDialogOpen}>
-        <DialogTitle>{titleTextByLanguage}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{summaryTextByLanguage}</DialogContentText>
-          <HomePageSignInStepper />
-        </DialogContent>
-        <DialogActions classes={{ root: classes.actions }}>
-          <HomePageSignInRenRenButton />
-        </DialogActions>
+        <BoxNoUserDragOrSelect>
+          <DialogTitle>{titleTextByLanguage}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>{summaryTextByLanguage}</DialogContentText>
+            <HomePageSignInStepper />
+          </DialogContent>
+          <DialogActions classes={{ root: classes.actions }}>
+            <HomePageSignInRenRenButton />
+          </DialogActions>
+        </BoxNoUserDragOrSelect>
       </Dialog>
     </Box>
   );
