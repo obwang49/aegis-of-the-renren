@@ -7,8 +7,8 @@
  */
 
 import React from "react";
-import { RecoilRoot } from "recoil";
 import { BrowserRouter as Router } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import App from "./app/App.react";

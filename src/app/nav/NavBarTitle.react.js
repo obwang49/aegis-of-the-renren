@@ -7,17 +7,12 @@
  */
 
 import React from "react";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  useTheme,
-} from "@material-ui/core/styles";
+import { styled } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import { useValueByAppPath } from "../../utils/AppPathUtils";
 
-const TITLE_TEXT_VARIANT = "h4";
 const titleText = Object.freeze({
   cn: {
     home: "人人之守护",
@@ -27,25 +22,13 @@ const titleText = Object.freeze({
   },
 });
 
-export default function NavBarTitle() {
-  const appTheme = useTheme();
-  const textTheme = createMuiTheme({
-    typography: {
-      [TITLE_TEXT_VARIANT]: {
-        fontFamily: appTheme.typography.fontFamily,
-        fontWeight: "bold",
-      },
-    },
-  });
+const TitleTextTypography = styled(Typography)({
+  fontWeight: "bold",
+});
 
+export default function NavBarTitle() {
   const textByLanguage = useValueByAppLanguage(titleText);
   const textByPath = useValueByAppPath(textByLanguage);
 
-  return (
-    <ThemeProvider theme={textTheme}>
-      <Typography noWrap variant={TITLE_TEXT_VARIANT}>
-        {textByPath}
-      </Typography>
-    </ThemeProvider>
-  );
+  return <TitleTextTypography variant="h4">{textByPath}</TitleTextTypography>;
 }

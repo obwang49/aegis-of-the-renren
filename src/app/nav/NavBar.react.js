@@ -8,11 +8,12 @@
 
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
 
 import { combineClasses } from "../../utils/AppStylesUtils";
-import DivNoUserDragOrSelect from "../common/DivNoUserDragOrSelect.react";
+import BoxNoUserDragOrSelect from "../common/BoxNoUserDragOrSelect.react";
 import NavBarAppLanguageMenu from "./NavBarAppLanguageMenu.react";
 import NavBarAppThemeModeButton from "./NavBarAppThemeModeButton.react";
 import NavBarLogo from "./NavBarLogo.react";
@@ -32,20 +33,20 @@ export default function NavBar() {
 
   return (
     <AppBar position="sticky">
-      <DivNoUserDragOrSelect>
+      <BoxNoUserDragOrSelect>
         <Toolbar>
           <NavBarLogo />
-          <div className={combineClasses([classes.title, classes.item])}>
+          <Box className={combineClasses([classes.title, classes.item])}>
             <NavBarTitle />
-          </div>
-          <div className={classes.item}>
+          </Box>
+          <Box className={classes.item}>
             <NavBarAppLanguageMenu />
-          </div>
-          <div className={classes.item}>
+          </Box>
+          <Box className={classes.item}>
             <NavBarAppThemeModeButton />
-          </div>
+          </Box>
         </Toolbar>
-      </DivNoUserDragOrSelect>
+      </BoxNoUserDragOrSelect>
     </AppBar>
   );
 }

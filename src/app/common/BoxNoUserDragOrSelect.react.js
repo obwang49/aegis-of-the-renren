@@ -7,6 +7,7 @@
  */
 
 import React from "react";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
 export const styleNoUserDragOrSelect = Object.freeze({
@@ -19,15 +20,15 @@ export const styleNoUserDragOrSelect = Object.freeze({
 });
 
 export const useStyles = makeStyles((theme) => ({
-  div: styleNoUserDragOrSelect,
+  box: styleNoUserDragOrSelect,
 }));
 
 type Props = {
   children: ?React.Node,
 };
 
-export default function DivNoUserDragOrSelect({ children }: Props) {
+export default function BoxNoUserDragOrSelect({ children }: Props) {
   const classes = useStyles();
 
-  return <div className={classes.div}>{children}</div>;
+  return <Box className={classes.box}>{children}</Box>;
 }

@@ -7,6 +7,7 @@
  */
 
 import { useEffect } from "react";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useAppThemeModeURLSearchParam } from "./AppURLSearchParamUtils";
 
@@ -17,7 +18,16 @@ export const AppThemeModeOption = Object.freeze({
 });
 const DEFAULT_APP_THEME_MODE_OPTION = AppThemeModeOption.light;
 
-function getValidAppThemeModeOption(appThemeMode: string): string {
+function getValidAppThemeModeOption(
+  appThemeMode: string,
+  isPrefersDarkMode: boolean
+): string {
+  if (!appThemeMode) {
+    return isPrefersDarkMode
+      ? AppThemeModeOption.dark
+      : AppThemeModeOption.light;
+  }
+
   const appThemeModeLower = appThemeMode.toLowerCase();
   const isAppThemeModeLowerOptionValid = Object.keys(
     AppThemeModeOption
@@ -31,12 +41,17 @@ export function useAppThemeMode(): {
   appThemeMode: AppThemeModeOptionType,
   setAppThemeMode: (AppThemeModeOptionType) => void,
 } {
+  const isPrefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
   const {
     appThemeModeURLSearchParam,
     setAppThemeModeURLSearchParam,
   } = useAppThemeModeURLSearchParam();
 
-  const appThemeMode = getValidAppThemeModeOption(appThemeModeURLSearchParam);
+  const appThemeMode = getValidAppThemeModeOption(
+    appThemeModeURLSearchParam,
+    isPrefersDarkMode
+  );
 
   useEffect(() => {
     if (appThemeMode !== appThemeModeURLSearchParam) {

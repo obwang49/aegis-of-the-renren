@@ -19,6 +19,10 @@ export const AppPathOption = Object.freeze({
 const DEFAULT_APP_PATH_OPTION = AppPathOption.home;
 
 function getValidAppPathOption(appPath: string): string {
+  if (!appPath) {
+    return DEFAULT_APP_PATH_OPTION;
+  }
+
   const appPathLower = appPath.toLowerCase();
   const isAppPathLowerOptionValid = Object.keys(AppPathOption).includes(
     appPathLower

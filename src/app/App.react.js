@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import { deepOrange, cyan } from "@material-ui/core/colors";
+import { cyan, deepOrange } from "@material-ui/core/colors";
 import {
   createMuiTheme,
   responsiveFontSizes,
@@ -17,8 +17,8 @@ import {
 import { useValueByAppPath } from "../utils/AppPathUtils";
 import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
 import { useAppThemeMode } from "../utils/AppThemeModeUtils";
-import NavBar from "./nav/NavBar.react";
 import HomePage from "./home/HomePage.react";
+import NavBar from "./nav/NavBar.react";
 
 export const APP_THEME_PALETTE_PRIMARY_MAIN = cyan[900];
 export const appThemeBase = Object.freeze({

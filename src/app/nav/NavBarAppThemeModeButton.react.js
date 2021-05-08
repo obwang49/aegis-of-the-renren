@@ -54,7 +54,7 @@ export default function NavBarAppThemeModeButton() {
       title={tooltipTextByLanguage}
       TransitionComponent={Zoom}
     >
-      <IconButton color="inherit" onClick={toggleAppThemeMode} size="large">
+      <IconButton color="inherit" onClick={toggleAppThemeMode}>
         {iconByThemeMode}
       </IconButton>
     </Tooltip>

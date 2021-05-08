@@ -10,7 +10,7 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { styleNoUserDragOrSelect } from "../common/DivNoUserDragOrSelect.react";
+import { styleNoUserDragOrSelect } from "../common/BoxNoUserDragOrSelect.react";
 
 import logo from "../../assets/logo.jpg";
 

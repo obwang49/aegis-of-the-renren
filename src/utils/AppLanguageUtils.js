@@ -18,6 +18,10 @@ export const AppLanguageOption = Object.freeze({
 const DEFAULT_APP_LANGUAGE_OPTION = AppLanguageOption.cn;
 
 function getValidAppLanguageOption(appLanguage: string): string {
+  if (!appLanguage) {
+    return DEFAULT_APP_LANGUAGE_OPTION;
+  }
+
   const appLanguageLower = appLanguage.toLowerCase();
   const isAppLanguageLowerOptionValid = Object.keys(AppLanguageOption).includes(
     appLanguageLower

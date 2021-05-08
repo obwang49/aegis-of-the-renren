@@ -7,6 +7,7 @@
  */
 
 import React from "react";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { combineClasses } from "../../utils/AppStylesUtils";
@@ -16,10 +17,10 @@ import cover from "../../assets/cover.png";
 
 const useStyles = makeStyles((theme) => ({
   cover: {
-    height: "100vh",
+    height: "100%",
     position: "absolute",
     top: "0",
-    width: "100vw",
+    width: "100%",
   },
   image: {
     backgroundImage: `url(${cover})`,
@@ -36,8 +37,8 @@ export default function HomePageCover() {
 
   return (
     <>
-      <div className={combineClasses([classes.cover, classes.image])} />
-      <div className={combineClasses([classes.cover, classes.shade])} />
+      <Box className={combineClasses([classes.cover, classes.image])} />
+      <Box className={combineClasses([classes.cover, classes.shade])} />
     </>
   );
 }
