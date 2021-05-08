@@ -19,6 +19,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import HomePageSignInButton from "./HomePageSignInButton.react";
+import HomePageSignInRenRenButton from "./HomePageSignInRenRenButton.react";
+import HomePageSignInStepper from "./HomePageSignInStepper.react";
 
 const titleText = Object.freeze({
   cn: "登陆人人账号",
@@ -34,7 +36,7 @@ const summaryText = Object.freeze({
 
 const useStyles = makeStyles((theme) => ({
   box: {
-    bottom: theme.spacing(12),
+    bottom: "calc( 25vh - 10vw )",
     display: "flex",
     left: "0",
     justifyContent: "center",
@@ -64,11 +66,10 @@ export default function HomePageSignInDialog() {
         <DialogTitle>{titleTextByLanguage}</DialogTitle>
         <DialogContent>
           <DialogContentText>{summaryTextByLanguage}</DialogContentText>
+          <HomePageSignInStepper />
         </DialogContent>
         <DialogActions classes={{ root: classes.actions }}>
-          <Button onClick={toggleDiaglog} color="primary">
-            Agree
-          </Button>
+          <HomePageSignInRenRenButton />
         </DialogActions>
       </Dialog>
     </Box>

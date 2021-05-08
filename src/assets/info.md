@@ -14,3 +14,6 @@ This folder contains all the assets being used in this project, where as the org
 + logo.jpg
   - @original: aegis-of-the-immortal.jpg
   - @link: https://dota.fandom.com/wiki/Aegis_of_the_Immortal
++ sign_in.png
+  - @original: renren-sign-in.png
+  - @link: http://open.renren.com/wiki/%E4%BA%BA%E4%BA%BA%E7%B4%A0%E6%9D%90

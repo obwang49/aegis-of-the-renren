@@ -24,14 +24,14 @@ const coverTextBottom = Object.freeze({
 
 const CoverTextTypography = styled(Typography)({
   color: "white",
-  fontSize: "min( 22vmin, 15vw )",
+  fontSize: "min( 20vmin, 15vw )",
   fontWeight: "bold",
 });
 
 const useStyles = makeStyles((theme) => ({
   box: {
     marginLeft: theme.spacing(2),
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(2),
   },
   divider: {
     height: theme.spacing(2),
