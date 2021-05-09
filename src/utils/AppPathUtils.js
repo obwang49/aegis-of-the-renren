@@ -6,6 +6,8 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
+import { useEffect } from "react";
+
 import { useRenRenOauthInfo } from "../utils/RenRenOauthUtils";
 import { useAppPathURLSearchParam } from "./AppURLSearchParamUtils";
 
@@ -56,9 +58,12 @@ export function useAppPath(): {
   const { accessToken } = useRenRenOauthInfo();
 
   const appPath = getValidAppPathOption(appPathURLSearchParam, accessToken);
-  if (appPath !== appPathURLSearchParam) {
-    setAppPathURLSearchParam(appPath);
-  }
+
+  useEffect(() => {
+    if (appPath !== appPathURLSearchParam) {
+      setAppPathURLSearchParam(appPath);
+    }
+  }, [appPath, appPathURLSearchParam, setAppPathURLSearchParam]);
 
   return {
     appPath,

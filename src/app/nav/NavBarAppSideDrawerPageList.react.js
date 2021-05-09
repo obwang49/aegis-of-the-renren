@@ -54,6 +54,7 @@ export default function NavBarAppSideDrawerPageList({ onClose }: Props) {
         return (
           <NavBarAppSideDrawerPageListItem
             icon={icon}
+            key={targetPage}
             onClose={onClose}
             targetPage={targetPage}
             text={text}

@@ -18,17 +18,21 @@ const defaultAppCookieOption = Object.freeze({
   secure: true,
 });
 
+type CookieOptionType = {
+  maxAge: number,
+};
+
 function useAppCookieByName(
   name: string
 ): {
   cookie: string,
-  setCookie: (string, mixed) => void,
+  setCookie: (string, CookieOptionType) => void,
   removeCookie: () => void,
 } {
   const [appCookies, setAppCookie, removeAppCookie] = useCookies([name]);
 
   const cookie = appCookies[name] ?? "";
-  const setCookie = (value: string, option: mixed) => {
+  const setCookie = (value: string, option: CookieOptionType) => {
     setAppCookie(name, value, { ...defaultAppCookieOption, ...option });
   };
   const removeCookie = () => {
@@ -40,7 +44,7 @@ function useAppCookieByName(
 
 export function useAppAccessTokenCookie(): {
   appAccessTokenCookie: string,
-  setAppAccessTokenCookie: (string, mixed) => void,
+  setAppAccessTokenCookie: (string, CookieOptionType) => void,
   removeAppAccessTokenCookie: () => void,
 } {
   const {
@@ -57,7 +61,7 @@ export function useAppAccessTokenCookie(): {
 
 export function useAppLanguageCookie(): {
   appLanguageCookie: string,
-  setAppLanguageCookie: (string, mixed) => void,
+  setAppLanguageCookie: (string, CookieOptionType) => void,
   removeAppLanguageCookie: () => void,
 } {
   const {
@@ -74,7 +78,7 @@ export function useAppLanguageCookie(): {
 
 export function useAppThemeModeCookie(): {
   appThemeModeCookie: string,
-  setAppThemeModeCookie: (string, mixed) => void,
+  setAppThemeModeCookie: (string, CookieOptionType) => void,
   removeAppThemeModeCookie: () => void,
 } {
   const {

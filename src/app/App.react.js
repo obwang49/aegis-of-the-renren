@@ -18,8 +18,10 @@ import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
 import { useValueByAppPath } from "../utils/AppPathUtils";
 import { useAppThemeMode } from "../utils/AppThemeModeUtils";
 import { useRenRenOauthResponse } from "../utils/RenRenOauthUtils";
+import AppSignInUserInfoLoader from "./AppSignInUserInfoLoader.react";
 import HomePage from "./home/HomePage.react";
 import NavBar from "./nav/NavBar.react";
+import ProfilePage from "./profile/ProfilePage.react";
 
 export const APP_THEME_PALETTE_PRIMARY_MAIN = cyan[900];
 export const appThemeBase = Object.freeze({
@@ -56,19 +58,20 @@ export default function App() {
     })
   );
 
-  useRenRenOauthResponse();
-
   const appPage = useValueByAppPath({
     blog: <h1>Aegis Of The Blog</h1>,
     faq: <h1>Aegis Of The FAQ</h1>,
     home: <HomePage />,
-    profile: <h1>Aegis Of The Profile</h1>,
+    profile: <ProfilePage />,
   });
+
+  useRenRenOauthResponse();
 
   return (
     <ThemeProvider theme={appTheme}>
       <NavBar />
       {appPage}
+      <AppSignInUserInfoLoader />
     </ThemeProvider>
   );
 }

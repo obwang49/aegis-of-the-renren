@@ -20,7 +20,7 @@ type Props = {
   icon: React.Node,
   onClose: () => void,
   targetPage: AppPathOptionType,
-  text: mixed,
+  text: { [AppPathOptionType]: string },
 };
 
 export default function NavBarAppSideDrawerPageListItem({

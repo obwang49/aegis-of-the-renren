@@ -6,6 +6,8 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
+import { useEffect } from "react";
+
 import { useAppLanguageCookie } from "./AppCookieUtils";
 
 export type AppLanguageOptionType = "cn" | "eng";
@@ -36,9 +38,12 @@ export function useAppLanguage(): {
   const { appLanguageCookie, setAppLanguageCookie } = useAppLanguageCookie();
 
   const appLanguage = getValidAppLanguageOption(appLanguageCookie);
-  if (appLanguage !== appLanguageCookie) {
-    setAppLanguageCookie(appLanguage);
-  }
+
+  useEffect(() => {
+    if (appLanguage !== appLanguageCookie) {
+      setAppLanguageCookie(appLanguage);
+    }
+  }, [appLanguage, appLanguageCookie, setAppLanguageCookie]);
 
   return {
     appLanguage,

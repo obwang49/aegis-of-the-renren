@@ -6,6 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
+import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { useAppAccessTokenCookie } from "./AppCookieUtils";
@@ -123,14 +124,17 @@ export function useRenRenOauthResponse(): void {
 
   const { setAccessToken } = useRenRenOauthInfo();
 
-  const { hash } = location;
-  if (!hash) {
-    return;
-  }
+  useEffect(() => {
+    const { hash } = location;
+    if (!hash) {
+      return;
+    }
 
-  const oauthInfo = parseRenRenOauthResponseURLHash(hash);
-  setAccessToken(oauthInfo);
-  history.replace({ ...location, hash: "" });
+    const oauthInfo = parseRenRenOauthResponseURLHash(hash);
+    setAccessToken(oauthInfo);
+
+    history.replace({ ...location, hash: "" });
+  }, [location, setAccessToken, history]);
 }
 
 export function useRenRenOauthInfo(): {

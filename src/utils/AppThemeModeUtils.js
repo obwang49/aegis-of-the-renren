@@ -6,6 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
+import { useEffect } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useAppThemeModeCookie } from "./AppCookieUtils";
@@ -48,9 +49,12 @@ export function useAppThemeMode(): {
     appThemeModeCookie,
     isPrefersDarkMode
   );
-  if (appThemeMode !== appThemeModeCookie) {
-    setAppThemeModeCookie(appThemeMode);
-  }
+
+  useEffect(() => {
+    if (appThemeMode !== appThemeModeCookie) {
+      setAppThemeModeCookie(appThemeMode);
+    }
+  }, [appThemeMode, appThemeModeCookie, setAppThemeModeCookie]);
 
   return {
     appThemeMode,
