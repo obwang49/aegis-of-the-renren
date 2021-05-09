@@ -8,12 +8,12 @@
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import { useAppThemeModeURLSearchParam } from "./AppURLSearchParamUtils";
+import { useAppThemeModeCookie } from "./AppCookieUtils";
 
-type AppThemeModeOptionType = "light" | "dark";
+type AppThemeModeOptionType = "dark" | "light";
 export const AppThemeModeOption = Object.freeze({
-  light: "light",
   dark: "dark",
+  light: "light",
 });
 const DEFAULT_APP_THEME_MODE_OPTION = AppThemeModeOption.light;
 
@@ -42,22 +42,19 @@ export function useAppThemeMode(): {
 } {
   const isPrefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  const {
-    appThemeModeURLSearchParam,
-    setAppThemeModeURLSearchParam,
-  } = useAppThemeModeURLSearchParam();
+  const { appThemeModeCookie, setAppThemeModeCookie } = useAppThemeModeCookie();
 
   const appThemeMode = getValidAppThemeModeOption(
-    appThemeModeURLSearchParam,
+    appThemeModeCookie,
     isPrefersDarkMode
   );
-  if (appThemeMode !== appThemeModeURLSearchParam) {
-    setAppThemeModeURLSearchParam(appThemeMode);
+  if (appThemeMode !== appThemeModeCookie) {
+    setAppThemeModeCookie(appThemeMode);
   }
-  
+
   return {
     appThemeMode,
-    setAppThemeMode: setAppThemeModeURLSearchParam,
+    setAppThemeMode: setAppThemeModeCookie,
   };
 }
 

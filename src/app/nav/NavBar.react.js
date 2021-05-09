@@ -15,6 +15,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { combineClasses } from "../../utils/AppStylesUtils";
 import BoxNoUserDragOrSelect from "../common/BoxNoUserDragOrSelect.react";
 import NavBarAppLanguageMenu from "./NavBarAppLanguageMenu.react";
+import NavBarAppSideDrawer from "./NavBarAppSideDrawer.react";
 import NavBarAppThemeModeButton from "./NavBarAppThemeModeButton.react";
 import NavBarLogo from "./NavBarLogo.react";
 import NavBarTitle from "./NavBarTitle.react";
@@ -44,6 +45,9 @@ export default function NavBar() {
           </Box>
           <Box className={classes.item}>
             <NavBarAppThemeModeButton />
+          </Box>
+          <Box className={classes.item}>
+            <NavBarAppSideDrawer />
           </Box>
         </Toolbar>
       </BoxNoUserDragOrSelect>

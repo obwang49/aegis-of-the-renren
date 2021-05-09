@@ -6,7 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useAppLanguageURLSearchParam } from "./AppURLSearchParamUtils";
+import { useAppLanguageCookie } from "./AppCookieUtils";
 
 export type AppLanguageOptionType = "cn" | "eng";
 export const AppLanguageOption = Object.freeze({
@@ -33,19 +33,16 @@ export function useAppLanguage(): {
   appLanguage: AppLanguageOptionType,
   setAppLanguage: (AppLanguageOptionType) => void,
 } {
-  const {
-    appLanguageURLSearchParam,
-    setAppLanguageURLSearchParam,
-  } = useAppLanguageURLSearchParam();
+  const { appLanguageCookie, setAppLanguageCookie } = useAppLanguageCookie();
 
-  const appLanguage = getValidAppLanguageOption(appLanguageURLSearchParam);
-  if (appLanguage !== appLanguageURLSearchParam) {
-    setAppLanguageURLSearchParam(appLanguage);
+  const appLanguage = getValidAppLanguageOption(appLanguageCookie);
+  if (appLanguage !== appLanguageCookie) {
+    setAppLanguageCookie(appLanguage);
   }
 
   return {
     appLanguage,
-    setAppLanguage: setAppLanguageURLSearchParam,
+    setAppLanguage: setAppLanguageCookie,
   };
 }
 

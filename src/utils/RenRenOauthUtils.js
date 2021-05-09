@@ -6,8 +6,9 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useCookies } from "react-cookie";
 import { useHistory, useLocation } from "react-router-dom";
+
+import { useAppAccessTokenCookie } from "./AppCookieUtils";
 
 /**
  * RenRen Oauth2.0 Overview
@@ -57,11 +58,16 @@ function getRenRenOauthRequestValueRedirectURI(
   return redirectURL.href;
 }
 
+function getRenRenOauthRequestValueScope(): string {
+  const scope = Object.values(renrenOauthRequestPermissions).join(" ");
+  return scope;
+}
+
 export function useRenRenOauthRequestURL(): string {
   const { pathname, search } = useLocation();
   const redirectURI = getRenRenOauthRequestValueRedirectURI(pathname, search);
 
-  const scope = Object.values(renrenOauthRequestPermissions).join(" ");
+  const scope = getRenRenOauthRequestValueScope();
 
   const renrenOauthRequestURL = new URL(
     RENREN_OAUTH_REQUEST_PATH,
@@ -130,15 +136,14 @@ export function useRenRenOauthResponse(): void {
 export function useRenRenOauthInfo(): {
   accessToken: string,
   setAccessToken: (RenRenOauthInfo) => void,
+  removeAccessToken: () => void,
 } {
-  const [
-    oauthInfoCookies,
-    setOauthInfoCookie,
-    removeOauthInfoCookie,
-  ] = useCookies([RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN]);
+  const {
+    appAccessTokenCookie,
+    setAppAccessTokenCookie,
+    removeAppAccessTokenCookie,
+  } = useAppAccessTokenCookie();
 
-  const accessToken =
-    oauthInfoCookies[RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN] ?? "";
   const setAccessToken = (newOauthInfo: RenRenOauthInfo) => {
     const {
       [RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN]: newAccessToken,
@@ -146,23 +151,17 @@ export function useRenRenOauthInfo(): {
     } = newOauthInfo;
 
     if (!newAccessToken) {
-      removeOauthInfoCookie(RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN);
+      removeAppAccessTokenCookie();
     } else {
-      setOauthInfoCookie(
-        RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN,
-        newAccessToken,
-        {
-          maxAge: newExpiresIn,
-          path: "/",
-          secure: true,
-        }
-      );
+      setAppAccessTokenCookie(newAccessToken, {
+        maxAge: newExpiresIn,
+      });
     }
   };
 
-  return { accessToken, setAccessToken };
+  return {
+    accessToken: appAccessTokenCookie,
+    setAccessToken,
+    removeAccessToken: removeAppAccessTokenCookie,
+  };
 }
-
-/**
-?la=cn&p=home&tm=light#access_token=600773%7C6.3c04eab2d05efae07179cf33f3c709a6.2592000.1623045600-341163407&expires_in=2594676&scope=read_user_message+send_notification+write_guestbook+send_request+read_user_album+read_user_checkin+read_user_status+send_message+read_user_notification+read_user_share+send_invitation+photo_upload+publish_comment+publish_blog+read_user_comment+create_album+read_user_guestbook+publish_share+read_user_like_history+operate_like+read_user_feed+read_user_photo+read_user_invitation+publish_checkin+status_update+read_user_request+publish_feed+read_user_blog
-*/

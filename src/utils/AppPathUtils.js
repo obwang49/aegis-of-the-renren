@@ -6,14 +6,14 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useAppPathURLSearchParam } from "./AppURLSearchParamUtils";
 import { useRenRenOauthInfo } from "../utils/RenRenOauthUtils";
+import { useAppPathURLSearchParam } from "./AppURLSearchParamUtils";
 
-export type AppPathOptionType = "home" | "profile" | "blog";
+export type AppPathOptionType = "blog" | "home" | "profile";
 export const AppPathOption = Object.freeze({
+  blog: "blog",
   home: "home",
   profile: "profile",
-  blog: "blog",
 });
 const DEFAULT_APP_PATH_OPTION_NO_ACCESS_TOKEN = AppPathOption.home;
 const DEFAULT_APP_PATH_OPTION_WITH_ACCESS_TOKEN = AppPathOption.profile;

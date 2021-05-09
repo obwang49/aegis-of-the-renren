@@ -8,9 +8,7 @@
 
 import { useHistory, useLocation } from "react-router-dom";
 
-const APP_LANGUAGE_URL_SEARCH_PARAM_KEY = "la";
-const APP_PATH_URL_SEARCH_PARAM_KEY = "p";
-const APP_THEME_MODE_URL_SEARCH_PARAM_KEY = "tm";
+const APP_PATH_URL_SEARCH_PARAM_KEY = "path";
 
 function useAppURLSearchParam(
   key: string
@@ -36,20 +34,6 @@ function useAppURLSearchParam(
   return { param, setParam };
 }
 
-export function useAppLanguageURLSearchParam(): {
-  appLanguageURLSearchParam: string,
-  setAppLanguageURLSearchParam: (string) => void,
-} {
-  const {
-    param: appLanguageURLSearchParam,
-    setParam: setAppLanguageURLSearchParam,
-  } = useAppURLSearchParam(APP_LANGUAGE_URL_SEARCH_PARAM_KEY);
-  return {
-    appLanguageURLSearchParam,
-    setAppLanguageURLSearchParam,
-  };
-}
-
 export function useAppPathURLSearchParam(): {
   appPathURLSearchParam: string,
   setAppPathURLSearchParam: (string) => void,
@@ -61,19 +45,5 @@ export function useAppPathURLSearchParam(): {
   return {
     appPathURLSearchParam,
     setAppPathURLSearchParam,
-  };
-}
-
-export function useAppThemeModeURLSearchParam(): {
-  appThemeModeURLSearchParam: string,
-  setAppThemeModeURLSearchParam: (string) => void,
-} {
-  const {
-    param: appThemeModeURLSearchParam,
-    setParam: setAppThemeModeURLSearchParam,
-  } = useAppURLSearchParam(APP_THEME_MODE_URL_SEARCH_PARAM_KEY);
-  return {
-    appThemeModeURLSearchParam,
-    setAppThemeModeURLSearchParam,
   };
 }

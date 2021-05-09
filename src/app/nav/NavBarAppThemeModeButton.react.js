@@ -25,13 +25,15 @@ const tooltipText = Object.freeze({
   eng: "Toggle light/dark theme",
 });
 
+const buttonIcon = Object.freeze({
+  dark: <Brightness7Icon />,
+  light: <Brightness4Icon />,
+});
+
 export default function NavBarAppThemeModeButton() {
   const tooltipTextByLanguage = useValueByAppLanguage(tooltipText);
 
-  const iconByThemeMode = useValueByAppThemeMode({
-    light: <Brightness4Icon />,
-    dark: <Brightness7Icon />,
-  });
+  const iconByThemeMode = useValueByAppThemeMode(buttonIcon);
 
   const { appThemeMode, setAppThemeMode } = useAppThemeMode();
   const toggleAppThemeMode = () => {

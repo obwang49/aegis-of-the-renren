@@ -7,8 +7,8 @@
  */
 
 import React from "react";
-import Link from "@material-ui/core/Link";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useRenRenOauthRequestURL } from "../../utils/RenRenOauthUtils";
