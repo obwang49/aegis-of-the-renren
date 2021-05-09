@@ -9,17 +9,22 @@
 import { useRenRenOauthInfo } from "../utils/RenRenOauthUtils";
 import { useAppPathURLSearchParam } from "./AppURLSearchParamUtils";
 
-export type AppPathOptionType = "blog" | "home" | "profile";
+export type AppPathOptionType = "blog" | "faq" | "home" | "profile";
 export const AppPathOption = Object.freeze({
   blog: "blog",
+  faq: "faq",
   home: "home",
   profile: "profile",
 });
 const DEFAULT_APP_PATH_OPTION_NO_ACCESS_TOKEN = AppPathOption.home;
 const DEFAULT_APP_PATH_OPTION_WITH_ACCESS_TOKEN = AppPathOption.profile;
 const validAppPathOption = Object.freeze({
-  noAccessToken: [AppPathOption.home],
-  withAccessToken: [AppPathOption.profile, AppPathOption.blog],
+  noAccessToken: [AppPathOption.faq, AppPathOption.home],
+  withAccessToken: [
+    AppPathOption.blog,
+    AppPathOption.faq,
+    AppPathOption.profile,
+  ],
 });
 
 function getValidAppPathOption(appPath: string, accessToken: string): string {
@@ -61,11 +66,13 @@ export function useAppPath(): {
   };
 }
 
-export function useValueByAppPath({ blog, home, profile }): mixed {
+export function useValueByAppPath({ blog, faq, home, profile }): mixed {
   const { appPath } = useAppPath();
   switch (appPath) {
     case AppPathOption.blog:
       return blog;
+    case AppPathOption.faq:
+      return faq;
     case AppPathOption.home:
       return home;
     case AppPathOption.profile:

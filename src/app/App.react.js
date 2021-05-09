@@ -14,8 +14,8 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 
-import { useValueByAppPath } from "../utils/AppPathUtils";
 import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
+import { useValueByAppPath } from "../utils/AppPathUtils";
 import { useAppThemeMode } from "../utils/AppThemeModeUtils";
 import { useRenRenOauthResponse } from "../utils/RenRenOauthUtils";
 import HomePage from "./home/HomePage.react";
@@ -60,6 +60,7 @@ export default function App() {
 
   const appPage = useValueByAppPath({
     blog: <h1>Aegis Of The Blog</h1>,
+    faq: <h1>Aegis Of The FAQ</h1>,
     home: <HomePage />,
     profile: <h1>Aegis Of The Profile</h1>,
   });

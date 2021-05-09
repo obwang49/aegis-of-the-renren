@@ -7,8 +7,6 @@
  */
 
 import React from "react";
-import { useState } from "react";
-import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -18,7 +16,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import BoxNoUserDragOrSelect from "../common/BoxNoUserDragOrSelect.react";
-import HomePageSignInButton from "./HomePageSignInButton.react";
 import HomePageSignInRenRenButton from "./HomePageSignInRenRenButton.react";
 import HomePageSignInStepper from "./HomePageSignInStepper.react";
 
@@ -35,45 +32,34 @@ const summaryText = Object.freeze({
 });
 
 const useStyles = makeStyles((theme) => ({
-  box: {
-    bottom: "calc( 25vh - 10vw )",
-    display: "flex",
-    left: "0",
-    justifyContent: "center",
-    position: "absolute",
-    right: "0",
-  },
   actions: {
     justifyContent: "center",
   },
 }));
 
-export default function HomePageSignInDialog() {
+type Props = {
+  isOpen: boolean,
+  onClose: () => void,
+};
+
+export default function HomePageSignInDialog({ isOpen, onClose }: Props) {
   const classes = useStyles();
 
   const titleTextByLanguage = useValueByAppLanguage(titleText);
   const summaryTextByLanguage = useValueByAppLanguage(summaryText);
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const toggleDiaglog = () => {
-    setIsDialogOpen(!isDialogOpen);
-  };
-
   return (
-    <Box className={classes.box}>
-      <HomePageSignInButton onClick={toggleDiaglog} />
-      <Dialog onClose={toggleDiaglog} open={isDialogOpen}>
-        <BoxNoUserDragOrSelect>
-          <DialogTitle>{titleTextByLanguage}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>{summaryTextByLanguage}</DialogContentText>
-            <HomePageSignInStepper />
-          </DialogContent>
-          <DialogActions classes={{ root: classes.actions }}>
-            <HomePageSignInRenRenButton />
-          </DialogActions>
-        </BoxNoUserDragOrSelect>
-      </Dialog>
-    </Box>
+    <Dialog onClose={onClose} open={isOpen}>
+      <BoxNoUserDragOrSelect>
+        <DialogTitle>{titleTextByLanguage}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{summaryTextByLanguage}</DialogContentText>
+          <HomePageSignInStepper />
+        </DialogContent>
+        <DialogActions classes={{ root: classes.actions }}>
+          <HomePageSignInRenRenButton />
+        </DialogActions>
+      </BoxNoUserDragOrSelect>
+    </Dialog>
   );
 }
