@@ -72,12 +72,12 @@ export default function NavBarAppSideDrawer() {
       >
         <BoxNoUserDragOrSelect>
           {isHomePage ? (
-            <NavBarAppSideDrawerSignInItem />
+            <NavBarAppSideDrawerSignInItem onClose={toggleDrawer} />
           ) : (
-            <NavBarAppSideDrawerLogOutItem />
+            <NavBarAppSideDrawerLogOutItem onClose={toggleDrawer} />
           )}
           <Divider />
-          <NavBarAppSideDrawerPageList />
+          <NavBarAppSideDrawerPageList onClose={toggleDrawer} />
         </BoxNoUserDragOrSelect>
       </Drawer>
     </>

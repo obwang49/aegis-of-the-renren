@@ -13,7 +13,7 @@ import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 
 import { AppPathOption } from "../../utils/AppPathUtils";
-import NavBarAppSideDrawerPageItem from "./NavBarAppSideDrawerPageItem.react";
+import NavBarAppSideDrawerPageListItem from "./NavBarAppSideDrawerPageListItem.react";
 
 const pageListItems = Object.freeze({
   profile: {
@@ -42,14 +42,19 @@ const pageListItems = Object.freeze({
   },
 });
 
-export default function NavBarAppSideDrawerPageList() {
+type Props = {
+  onClose: () => void,
+};
+
+export default function NavBarAppSideDrawerPageList({ onClose }: Props) {
   return (
     <List>
       {Object.values(pageListItems).map((page) => {
         const { icon, targetPage, text } = page;
         return (
-          <NavBarAppSideDrawerPageItem
+          <NavBarAppSideDrawerPageListItem
             icon={icon}
+            onClose={onClose}
             targetPage={targetPage}
             text={text}
           />

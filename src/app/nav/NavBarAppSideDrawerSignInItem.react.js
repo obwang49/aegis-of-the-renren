@@ -28,7 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBarAppSideDrawerUserItem() {
+type Props = {
+  onClose: () => void,
+};
+
+export default function NavBarAppSideDrawerSignInItem({ onClose }: Props) {
   const classes = useStyles();
 
   const itemTextByLanguage = useValueByAppLanguage(itemText);
@@ -38,13 +42,14 @@ export default function NavBarAppSideDrawerUserItem() {
     setIsSignInDialogOpen(!isSignInDialogOpen);
   };
 
+  const signIn = () => {
+    toggleSignInDiaglog();
+    onClose();
+  };
+
   return (
     <>
-      <ListItem
-        button
-        className={classes.toolbar}
-        onClick={toggleSignInDiaglog}
-      >
+      <ListItem button className={classes.toolbar} onClick={signIn}>
         <ListItemIcon>
           <AccountCircleIcon />
         </ListItemIcon>

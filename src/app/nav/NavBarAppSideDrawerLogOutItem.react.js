@@ -26,13 +26,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBarAppSideDrawerLogOutItem() {
+type Props = {
+  onClose: () => void,
+};
+
+export default function NavBarAppSideDrawerLogOutItem({ onClose }: Props) {
   const classes = useStyles();
 
   const itemTextByLanguage = useValueByAppLanguage(itemText);
 
+  const logOut = () => {
+    onClose();
+  };
+
   return (
-    <ListItem button className={classes.toolbar} onClick={null}>
+    <ListItem button className={classes.toolbar} onClick={logOut}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>

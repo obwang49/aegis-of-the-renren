@@ -18,20 +18,24 @@ import { useAppPath } from "../../utils/AppPathUtils";
 
 type Props = {
   icon: React.Node,
+  onClose: () => void,
   targetPage: AppPathOptionType,
   text: mixed,
 };
 
-export default function NavBarAppSideDrawerPageItem({
+export default function NavBarAppSideDrawerPageListItem({
   icon,
+  onClose,
   targetPage,
   text,
 }: Props) {
   const textByLanguage = useValueByAppLanguage(text);
 
   const { setAppPath } = useAppPath();
+
   const openTargetPage = () => {
     setAppPath(targetPage);
+    onClose();
   };
 
   return (
