@@ -11,7 +11,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useAppAccessTokenCookie } from "./AppCookieUtils";
 
 /**
- * RenRen Oauth2.0 Overview
+ * RenRen Oauth 2.0 Overview
  *
  * + Documentation
  *   - @link: http://open.renren.com/wiki/OAuth2.0
