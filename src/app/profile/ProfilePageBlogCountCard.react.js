@@ -16,10 +16,6 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import { useAppProfileBlogCountLoader } from "../../utils/AppProfileUtils";
-import {
-  useAppSignInUserInfo,
-  useAppSignInUserInfoLoader,
-} from "../../utils/AppSignInUserUtils";
 import ProfilePageCardRefreshButton from "./ProfilePageCardRefreshButton.react";
 
 const titleText = Object.freeze({

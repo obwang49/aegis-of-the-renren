@@ -31,9 +31,11 @@ export default function ProfilePageUserNameCard() {
 
   const { userName } = useAppSignInUserInfo();
   const { load: loadSignInUserInfo } = useAppSignInUserInfoLoader();
+  const { load: loadProfileBlogCount } = useAppProfileBlogCountLoader();
 
   const refresh = () => {
     loadSignInUserInfo();
+    loadProfileBlogCount();
   };
 
   return (
