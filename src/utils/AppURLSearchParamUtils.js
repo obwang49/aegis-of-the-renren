@@ -6,6 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
+import { useCallback, useMemo } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 const APP_PATH_URL_SEARCH_PARAM_KEY = "path";
@@ -19,18 +20,23 @@ function useAppURLSearchParam(
   const history = useHistory();
   const location = useLocation();
 
-  const { search } = location;
-  const allParams = new URLSearchParams(search);
+  const allParams = useMemo(() => {
+    const { search } = location;
+    return new URLSearchParams(search);
+  }, [location]);
 
   const param = allParams.get(key) ?? "";
-  const setParam = (value: ?string) => {
-    if (value) {
-      allParams.set(key, value);
-    } else {
-      allParams.delete(key);
-    }
-    history.replace({ ...location, search: allParams.toString() });
-  };
+  const setParam = useCallback(
+    (value: ?string) => {
+      if (value) {
+        allParams.set(key, value);
+      } else {
+        allParams.delete(key);
+      }
+      history.replace({ ...location, search: allParams.toString() });
+    },
+    [allParams, key, location, history]
+  );
   return { param, setParam };
 }
 
