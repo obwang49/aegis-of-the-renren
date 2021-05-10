@@ -15,7 +15,6 @@ import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
 export function useAppProfileBlogCountLoader(): {
   load: () => void,
-  isLoading: boolean,
 } {
   const { setBlogCount } = useAppBlogCount();
 

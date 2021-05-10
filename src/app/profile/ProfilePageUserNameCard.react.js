@@ -7,7 +7,6 @@
  */
 
 import React from "react";
-
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -41,14 +40,14 @@ export default function ProfilePageUserNameCard() {
   return (
     <Card>
       <CardHeader
+        action={<ProfilePageCardRefreshButton onClick={refresh} />}
         avatar={
           <Avatar>
             <AccountBoxIcon />
           </Avatar>
         }
-        action={<ProfilePageCardRefreshButton onClick={refresh} />}
-        title={titleTextByLanguage}
         subheader={userName}
+        title={titleTextByLanguage}
       />
     </Card>
   );

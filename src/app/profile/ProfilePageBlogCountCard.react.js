@@ -7,7 +7,6 @@
  */
 
 import React from "react";
-
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -36,14 +35,14 @@ export default function ProfilePageBlogCountCard() {
   return (
     <Card>
       <CardHeader
+        action={<ProfilePageCardRefreshButton onClick={refresh} />}
         avatar={
           <Avatar>
             <DescriptionIcon />
           </Avatar>
         }
-        action={<ProfilePageCardRefreshButton onClick={refresh} />}
-        title={titleTextByLanguage}
         subheader={blogCount}
+        title={titleTextByLanguage}
       />
     </Card>
   );

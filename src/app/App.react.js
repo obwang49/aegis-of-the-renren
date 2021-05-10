@@ -27,10 +27,11 @@ import {
   useAppThemeModeSyncer,
 } from "../utils/AppThemeModeUtils";
 import { useRenRenOauthResponse } from "../utils/RenRenOauthUtils";
-import AppLoadingBackdrop from "./AppLoadingBackdrop.react";
+import BlogPage from "./blog/BlogPage.react";
 import HomePage from "./home/HomePage.react";
 import NavBar from "./nav/NavBar.react";
 import ProfilePage from "./profile/ProfilePage.react";
+import AppLoadingBackdrop from "./AppLoadingBackdrop.react";
 
 import Paper from "@material-ui/core/Paper";
 
@@ -78,7 +79,7 @@ export default function App() {
   );
 
   const appPage = useValueByAppPath({
-    blog: <h1>Aegis Of The Blog</h1>,
+    blog: <BlogPage/>,
     faq: <h1>Aegis Of The FAQ</h1>,
     home: <HomePage />,
     profile: <ProfilePage />,

@@ -6,7 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
@@ -79,15 +79,13 @@ export function useRenRenAPIRequest(
 
   const requestURL = getRenRenAPIRequestURL(accessToken, path, params);
 
-  const load = () => {
+  const load = useCallback(() => {
     setData(null);
     setError(null);
     setIsLoading(true);
 
-    console.log(requestURL);
-
     if (!requestURL) {
-      throw new Error(`Invalid empty URL to ${path}`);
+      setError({ code: 404 });
     }
 
     fetch(requestURL, { method })
@@ -102,7 +100,7 @@ export function useRenRenAPIRequest(
         setError(error);
         setIsLoading(false);
       });
-  };
+  }, [requestURL, method, setData, setError, setIsLoading]);
 
   return { load, isLoading, data, error };
 }
