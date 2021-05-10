@@ -7,15 +7,29 @@
  */
 
 import React from "react";
+import { useMemo } from "react";
 import List from "@material-ui/core/List";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import DescriptionIcon from "@material-ui/icons/Description";
+import HomeIcon from "@material-ui/icons/Home";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 
-import { AppPathOption } from "../../utils/AppPathUtils";
+import {
+  AppPathOption,
+  getValidAppPathOptions,
+} from "../../utils/AppPathUtils";
+import { useRenRenOauthInfo } from "../../utils/RenRenOauthUtils";
 import NavBarAppSideDrawerPageListItem from "./NavBarAppSideDrawerPageListItem.react";
 
 const pageListItems = Object.freeze({
+  home: {
+    icon: <HomeIcon />,
+    targetPage: AppPathOption.home,
+    text: {
+      cn: "首页",
+      eng: "Home",
+    },
+  },
   profile: {
     icon: <AccountBoxIcon />,
     targetPage: AppPathOption.profile,
@@ -47,9 +61,17 @@ type Props = {
 };
 
 export default function NavBarAppSideDrawerPageList({ onClose }: Props) {
+  const { accessToken } = useRenRenOauthInfo();
+  const validAppPathOptions = getValidAppPathOptions(accessToken);
+  const validPageListItmes = useMemo(() => {
+    return Object.values(pageListItems).filter((page) =>
+      validAppPathOptions.includes(page.targetPage)
+    );
+  }, [validAppPathOptions]);
+
   return (
     <List>
-      {Object.values(pageListItems).map((page) => {
+      {validPageListItmes.map((page) => {
         const { icon, targetPage, text } = page;
         return (
           <NavBarAppSideDrawerPageListItem

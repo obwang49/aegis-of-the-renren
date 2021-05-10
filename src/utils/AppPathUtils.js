@@ -20,7 +20,7 @@ export const AppPathOption = Object.freeze({
 });
 const DEFAULT_APP_PATH_OPTION_NO_ACCESS_TOKEN = AppPathOption.home;
 const DEFAULT_APP_PATH_OPTION_WITH_ACCESS_TOKEN = AppPathOption.profile;
-const validAppPathOption = Object.freeze({
+const validAppPathOptions = Object.freeze({
   noAccessToken: [AppPathOption.faq, AppPathOption.home],
   withAccessToken: [
     AppPathOption.blog,
@@ -28,6 +28,12 @@ const validAppPathOption = Object.freeze({
     AppPathOption.profile,
   ],
 });
+
+export function getValidAppPathOptions(accessToken: string): Array<string> {
+  return accessToken
+    ? validAppPathOptions.withAccessToken
+    : validAppPathOptions.noAccessToken;
+}
 
 function getValidAppPathOption(appPath: string, accessToken: string): string {
   const defaultAppPathOption = accessToken
@@ -39,9 +45,7 @@ function getValidAppPathOption(appPath: string, accessToken: string): string {
   }
 
   const appPathLower = appPath.toLowerCase();
-  const appPathValidOptions = accessToken
-    ? validAppPathOption.withAccessToken
-    : validAppPathOption.noAccessToken;
+  const appPathValidOptions = getValidAppPathOptions(accessToken);
   const isAppPathLowerOptionValid = appPathValidOptions.includes(appPathLower);
   return isAppPathLowerOptionValid ? appPathLower : defaultAppPathOption;
 }

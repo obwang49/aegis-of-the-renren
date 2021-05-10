@@ -14,10 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
+import { useAppSignInUserSignOut } from "../../utils/AppSignInUserUtils";
 
 const itemText = Object.freeze({
   cn: "登出",
-  eng: "Log Out",
+  eng: "Sign Out",
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -35,12 +36,15 @@ export default function NavBarAppSideDrawerLogOutItem({ onClose }: Props) {
 
   const itemTextByLanguage = useValueByAppLanguage(itemText);
 
-  const logOut = () => {
+  const { signOut: userSignOut } = useAppSignInUserSignOut();
+
+  const signOut = () => {
+    userSignOut();
     onClose();
   };
 
   return (
-    <ListItem button className={classes.toolbar} onClick={logOut}>
+    <ListItem button className={classes.toolbar} onClick={signOut}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>

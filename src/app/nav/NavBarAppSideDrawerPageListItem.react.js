@@ -31,7 +31,7 @@ export default function NavBarAppSideDrawerPageListItem({
 }: Props) {
   const textByLanguage = useValueByAppLanguage(text);
 
-  const { setAppPath } = useAppPath();
+  const { appPath, setAppPath } = useAppPath();
 
   const openTargetPage = () => {
     setAppPath(targetPage);
@@ -39,7 +39,7 @@ export default function NavBarAppSideDrawerPageListItem({
   };
 
   return (
-    <ListItem button onClick={openTargetPage}>
+    <ListItem button onClick={openTargetPage} selected={targetPage === appPath}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={textByLanguage} />
     </ListItem>

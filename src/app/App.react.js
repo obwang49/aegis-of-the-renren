@@ -79,7 +79,7 @@ export default function App() {
   );
 
   const appPage = useValueByAppPath({
-    blog: <BlogPage/>,
+    blog: <BlogPage />,
     faq: <h1>Aegis Of The FAQ</h1>,
     home: <HomePage />,
     profile: <ProfilePage />,

@@ -19,9 +19,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import { AppPathOption, useAppPath } from "../../utils/AppPathUtils";
 import BoxNoUserDragOrSelect from "../common/BoxNoUserDragOrSelect.react";
-import NavBarAppSideDrawerLogOutItem from "./NavBarAppSideDrawerLogOutItem.react";
+import HomePageSignInDialog from "../home/HomePageSignInDialog.react";
 import NavBarAppSideDrawerPageList from "./NavBarAppSideDrawerPageList.react";
 import NavBarAppSideDrawerSignInItem from "./NavBarAppSideDrawerSignInItem.react";
+import NavBarAppSideDrawerSignOutItem from "./NavBarAppSideDrawerSignOutItem.react";
 
 const tooltipText = Object.freeze({
   cn: "打开菜单栏",
@@ -33,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
-  // necessary for content to be below app bar
   toolbar: {
     ...theme.mixins.toolbar,
   },
@@ -50,6 +50,11 @@ export default function NavBarAppSideDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
+  const toggleSignInDialog = () => {
+    setIsSignInDialogOpen(!isSignInDialogOpen);
   };
 
   return (
@@ -72,14 +77,21 @@ export default function NavBarAppSideDrawer() {
       >
         <BoxNoUserDragOrSelect>
           {isHomePage ? (
-            <NavBarAppSideDrawerSignInItem onClose={toggleDrawer} />
+            <NavBarAppSideDrawerSignInItem
+              onClick={toggleSignInDialog}
+              onClose={toggleDrawer}
+            />
           ) : (
-            <NavBarAppSideDrawerLogOutItem onClose={toggleDrawer} />
+            <NavBarAppSideDrawerSignOutItem onClose={toggleDrawer} />
           )}
           <Divider />
           <NavBarAppSideDrawerPageList onClose={toggleDrawer} />
         </BoxNoUserDragOrSelect>
       </Drawer>
+      <HomePageSignInDialog
+        isOpen={isSignInDialogOpen}
+        onClose={toggleSignInDialog}
+      />
     </>
   );
 }

@@ -8,7 +8,7 @@
 
 import type { RecoilState } from "recoil";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
 import { useRenRenAPIUserLoginGet } from "./RenRenAPIUserUtils";
@@ -29,19 +29,23 @@ export function useAppSignInUserInfo(): {
   setUserID: (number) => void,
   userName: string,
   setUserName: (string) => void,
+  removeUserInfo: () => void,
 } {
   const [userID, setUserID] = useRecoilState(AppSignInUserID);
   const [userName, setUserName] = useRecoilState(AppSignInUserName);
-  return { userID, setUserID, userName, setUserName };
+  const removeUserInfo = useCallback(() => {
+    setUserID(0);
+    setUserName("");
+  }, [setUserID, setUserName]);
+  return { userID, setUserID, userName, setUserName, removeUserInfo };
 }
 
 export function useAppSignInUserInfoLoader(): {
   load: () => void,
 } {
-  const { setUserID, setUserName } = useAppSignInUserInfo();
+  const { removeUserInfo } = useAppSignInUserInfo();
   const load = () => {
-    setUserID(0);
-    setUserName("");
+    removeUserInfo();
   };
 
   return { load };
@@ -81,4 +85,17 @@ export function useAppSignInUserListener(): {
   }, [newUserID, newUserName, setUserID, setUserName]);
 
   return { isLoading, error };
+}
+
+export function useAppSignInUserSignOut(): {
+  signOut: () => void,
+} {
+  const { removeAccessToken } = useRenRenOauthInfo();
+  const { removeUserInfo } = useAppSignInUserInfo();
+
+  const signOut = useCallback(() => {
+    removeAccessToken();
+    removeUserInfo();
+  }, [removeAccessToken, removeUserInfo]);
+  return { signOut };
 }

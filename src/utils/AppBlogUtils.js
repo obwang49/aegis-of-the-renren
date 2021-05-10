@@ -17,8 +17,6 @@ import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
 import {
   RENREN_API_REQUEST_VALUE_PAGE_SIZE_DEFAULT,
-  RENREN_API_REQUEST_VALUE_PAGE_SIZE_MAX,
-  RENREN_API_REQUEST_VALUE_PAGE_SIZE_MIN,
   useRenRenAPIBlogList,
 } from "./RenRenAPIBlogUtils";
 
@@ -59,9 +57,7 @@ export function useAppProfileBlogCountLoader(): {
 }
 
 function getPageSizeOptions(): Array<number> {
-  return [...Array(RENREN_API_REQUEST_VALUE_PAGE_SIZE_MAX + 1).keys()].slice(
-    RENREN_API_REQUEST_VALUE_PAGE_SIZE_MIN
-  );
+  return [5, 10, 15, 20];
 }
 
 export function useAppBlogPageInfo(): {
