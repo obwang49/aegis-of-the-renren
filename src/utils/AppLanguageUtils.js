@@ -51,6 +51,17 @@ export function useAppLanguage(): {
   };
 }
 
+export function useAppLanguageSyncer(): void {
+  const { appLanguageCookie, setAppLanguageCookie } = useAppLanguageCookie();
+  const { appLanguage } = useAppLanguage();
+
+  useEffect(() => {
+    if (appLanguage !== appLanguageCookie) {
+      setAppLanguageCookie(appLanguage);
+    }
+  }, [appLanguage, appLanguageCookie, setAppLanguageCookie]);
+}
+
 export function useValueByAppLanguage({ cn, eng }): mixed {
   const { appLanguage } = useAppLanguage();
   switch (appLanguage) {
@@ -59,6 +70,6 @@ export function useValueByAppLanguage({ cn, eng }): mixed {
     case AppLanguageOption.eng:
       return eng;
     default:
-      throw new TypeError(`Unsupported language: ${appLanguage}!`);
+      throw new Error(`Unsupported language: ${appLanguage}!`);
   }
 }

@@ -22,18 +22,21 @@ const RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_ID = "id";
 const RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_NAME = "name";
 
 export function useRenRenAPIUserLoginGet(): {
-  isRequestInFlight: boolean,
+  load: () => void,
+  isLoading: boolean,
   userID: number,
   userName: string,
+  error: mixed,
 } {
-  const { isRequestInFlight, data } = useRenRenAPIRequest(
+  const { load, isLoading, data, error } = useRenRenAPIRequest(
     RENREN_API_REQUEST_PATH_USER_LOGIN_GET,
     RENREN_API_REQUEST_METHOD_USER_LOGIN_GET
   );
+
   const userID = data ? data[RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_ID] : 0;
   const userName = data
     ? data[RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_NAME]
     : "";
 
-  return { isRequestInFlight, userID, userName };
+  return { load, isLoading, userID, userName, error };
 }

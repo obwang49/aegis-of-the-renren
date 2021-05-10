@@ -11,17 +11,28 @@ import { cyan, deepOrange } from "@material-ui/core/colors";
 import {
   createMuiTheme,
   responsiveFontSizes,
+  makeStyles,
   ThemeProvider,
 } from "@material-ui/core/styles";
 
-import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
-import { useValueByAppPath } from "../utils/AppPathUtils";
-import { useAppThemeMode } from "../utils/AppThemeModeUtils";
+import {
+  useAppLanguageSyncer,
+  useValueByAppLanguage,
+} from "../utils/AppLanguageUtils";
+import { useAppPathSyncer, useValueByAppPath } from "../utils/AppPathUtils";
+import { useAppProfileBlogCountListener } from "../utils/AppProfileUtils";
+import { useAppSignInUserListener } from "../utils/AppSignInUserUtils";
+import {
+  useAppThemeMode,
+  useAppThemeModeSyncer,
+} from "../utils/AppThemeModeUtils";
 import { useRenRenOauthResponse } from "../utils/RenRenOauthUtils";
-import AppSignInUserInfoLoader from "./AppSignInUserInfoLoader.react";
+import AppLoadingBackdrop from "./AppLoadingBackdrop.react";
 import HomePage from "./home/HomePage.react";
 import NavBar from "./nav/NavBar.react";
 import ProfilePage from "./profile/ProfilePage.react";
+
+import Paper from "@material-ui/core/Paper";
 
 export const APP_THEME_PALETTE_PRIMARY_MAIN = cyan[900];
 export const appThemeBase = Object.freeze({
@@ -39,7 +50,15 @@ export const appThemeTypographyFontFamily = Object.freeze({
   eng: "Carter One",
 });
 
+const useStyles = makeStyles((theme) => ({
+  page: {
+    minHeight: "100vh",
+  },
+}));
+
 export default function App() {
+  const classes = useStyles();
+
   const appFontFamilyByLanguage = useValueByAppLanguage(
     appThemeTypographyFontFamily
   );
@@ -65,13 +84,28 @@ export default function App() {
     profile: <ProfilePage />,
   });
 
+  useAppLanguageSyncer();
+  useAppPathSyncer();
+  useAppThemeModeSyncer();
+
   useRenRenOauthResponse();
+
+  const { isLoading: isSignInUserInfoLoading } = useAppSignInUserListener();
+  const {
+    isLoading: isProfileBlogCountLoading,
+  } = useAppProfileBlogCountListener();
+
+  console.log("!!!");
 
   return (
     <ThemeProvider theme={appTheme}>
-      <NavBar />
-      {appPage}
-      <AppSignInUserInfoLoader />
+      <Paper className={classes.page}>
+        <NavBar />
+        {appPage}
+        <AppLoadingBackdrop
+          isLoading={isSignInUserInfoLoading || isProfileBlogCountLoading}
+        />
+      </Paper>
     </ThemeProvider>
   );
 }

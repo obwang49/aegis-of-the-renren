@@ -8,16 +8,16 @@
 
 import React from "react";
 import List from "@material-ui/core/List";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import DescriptionIcon from "@material-ui/icons/Description";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
-import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 
 import { AppPathOption } from "../../utils/AppPathUtils";
 import NavBarAppSideDrawerPageListItem from "./NavBarAppSideDrawerPageListItem.react";
 
 const pageListItems = Object.freeze({
   profile: {
-    icon: <PermContactCalendarIcon />,
+    icon: <AccountBoxIcon />,
     targetPage: AppPathOption.profile,
     text: {
       cn: "个人资料",

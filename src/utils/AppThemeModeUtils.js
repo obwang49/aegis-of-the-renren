@@ -62,6 +62,18 @@ export function useAppThemeMode(): {
   };
 }
 
+export function useAppThemeModeSyncer(): void {
+  const { appThemeModeCookie, setAppThemeModeCookie } = useAppThemeModeCookie();
+
+  const { appThemeMode } = useAppThemeMode();
+
+  useEffect(() => {
+    if (appThemeMode !== appThemeModeCookie) {
+      setAppThemeModeCookie(appThemeMode);
+    }
+  }, [appThemeMode, appThemeModeCookie, setAppThemeModeCookie]);
+}
+
 export function useValueByAppThemeMode({ light, dark }): mixed {
   const { appThemeMode } = useAppThemeMode();
   switch (appThemeMode) {
@@ -70,6 +82,6 @@ export function useValueByAppThemeMode({ light, dark }): mixed {
     case AppThemeModeOption.dark:
       return dark;
     default:
-      throw new TypeError(`Unsupported theme mode: ${appThemeMode}!`);
+      throw new Error(`Unsupported theme mode: ${appThemeMode}!`);
   }
 }

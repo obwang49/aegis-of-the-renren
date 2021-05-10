@@ -6,7 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
@@ -38,23 +38,25 @@ function getURLWithCORSProxy(url: string): string {
 }
 
 function getRenRenAPIRequestURL(
+  accessToken: string,
   path: string,
-  params: RenRenAPIRequestParamsType,
-  accessToken: string
+  params: RenRenAPIRequestParamsType
 ): string {
-  if (!accessToken) {
+  const allParams = {
+    ...(params ?? {}),
+    [RENREN_API_REQUEST_KEY_ACCESS_TOKEN]: accessToken,
+  };
+  const isAllParamsReady = Object.values(allParams).every(Boolean);
+  if (!isAllParamsReady) {
     return "";
   }
 
   const renrenAPIRequestURL = new URL(path, RENREN_API_REQUEST_BASE_URL);
 
   const searchParams = renrenAPIRequestURL.searchParams;
-  searchParams.append(RENREN_API_REQUEST_KEY_ACCESS_TOKEN, accessToken);
-  if (params) {
-    Object.entries(params).map(([key, value]) =>
-      searchParams.append(key, value)
-    );
-  }
+  Object.entries(allParams).map(([key, value]) =>
+    searchParams.append(key, value)
+  );
 
   return getURLWithCORSProxy(renrenAPIRequestURL.href);
 }
@@ -64,48 +66,45 @@ export function useRenRenAPIRequest(
   method: string,
   params: RenRenAPIRequestParamsType
 ): {
-  isRequestInFlight: boolean,
+  load: () => void,
+  isLoading: boolean,
   data: mixed,
   error: mixed,
 } {
   const { accessToken } = useRenRenOauthInfo();
 
-  const [isRequestInFlight, setIsRequestInFlight] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  const requestURL = getRenRenAPIRequestURL(path, params, accessToken);
+  const requestURL = getRenRenAPIRequestURL(accessToken, path, params);
 
-  useEffect(() => {
-    if (!requestURL || isRequestInFlight || data || error) {
-      return;
+  const load = () => {
+    setData(null);
+    setError(null);
+    setIsLoading(true);
+
+    console.log(requestURL);
+
+    if (!requestURL) {
+      throw new Error(`Invalid empty URL to ${path}`);
     }
 
-    setIsRequestInFlight(true);
     fetch(requestURL, { method })
       .then((response) => response.json())
       .then((payload) => {
-        setIsRequestInFlight(false);
         const { data, error } = parseCORSProxyPayload(payload);
         setData(data);
         setError(error);
+        setIsLoading(false);
       })
       .catch((error) => {
-        setIsRequestInFlight(false);
         setError(error);
+        setIsLoading(false);
       });
-  }, [
-    requestURL,
-    method,
-    isRequestInFlight,
-    setIsRequestInFlight,
-    data,
-    setData,
-    error,
-    setError,
-  ]);
+  };
 
-  return { isRequestInFlight, data, error };
+  return { load, isLoading, data, error };
 }
 
 function parseCORSProxyPayload(payload: mixed): { data: mixed, error: mixed } {

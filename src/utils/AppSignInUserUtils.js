@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
 import { useRenRenAPIUserLoginGet } from "./RenRenAPIUserUtils";
+import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
 const AppSignInUserID: RecoilState<number> = atom({
   key: "AppSignInUserID",
@@ -34,18 +35,50 @@ export function useAppSignInUserInfo(): {
   return { userID, setUserID, userName, setUserName };
 }
 
-export function useAppSignInUserInfoLoader(): { isLoading: boolean } {
-  const { isRequestInFlight, userID, userName } = useRenRenAPIUserLoginGet();
+export function useAppSignInUserInfoLoader(): {
+  load: () => void,
+} {
   const { setUserID, setUserName } = useAppSignInUserInfo();
+  const load = () => {
+    setUserID(0);
+    setUserName("");
+  };
+
+  return { load };
+}
+
+export function useAppSignInUserListener(): {
+  isLoading: boolean,
+  error: mixed,
+} {
+  const { accessToken } = useRenRenOauthInfo();
+
+  const {
+    load: loadData,
+    isLoading,
+    userID: newUserID,
+    userName: newUserName,
+    error,
+  } = useRenRenAPIUserLoginGet();
+
+  const { userID, setUserID, userName, setUserName } = useAppSignInUserInfo();
+  const { load } = useAppSignInUserInfoLoader();
 
   useEffect(() => {
-    if (isRequestInFlight || !userID || !userName) {
+    if (!accessToken || isLoading || userID || userName || error) {
       return;
     }
+    load();
+    loadData();
+  }, [accessToken, isLoading, userID, userName, error, load, loadData]);
 
-    setUserID(userID);
-    setUserName(userName);
-  }, [isRequestInFlight, userID, userName, setUserID, setUserName]);
+  useEffect(() => {
+    if (!newUserID || !newUserName) {
+      return;
+    }
+    setUserID(newUserID);
+    setUserName(newUserName);
+  }, [newUserID, newUserName, setUserID, setUserName]);
 
-  return { isLoading: isRequestInFlight };
+  return { isLoading, error };
 }

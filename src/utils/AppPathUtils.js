@@ -59,16 +59,25 @@ export function useAppPath(): {
 
   const appPath = getValidAppPathOption(appPathURLSearchParam, accessToken);
 
+  return {
+    appPath,
+    setAppPath: setAppPathURLSearchParam,
+  };
+}
+
+export function useAppPathSyncer(): void {
+  const {
+    appPathURLSearchParam,
+    setAppPathURLSearchParam,
+  } = useAppPathURLSearchParam();
+
+  const { appPath } = useAppPath();
+
   useEffect(() => {
     if (appPath !== appPathURLSearchParam) {
       setAppPathURLSearchParam(appPath);
     }
   }, [appPath, appPathURLSearchParam, setAppPathURLSearchParam]);
-
-  return {
-    appPath,
-    setAppPath: setAppPathURLSearchParam,
-  };
 }
 
 export function useValueByAppPath({ blog, faq, home, profile }): mixed {
@@ -83,6 +92,6 @@ export function useValueByAppPath({ blog, faq, home, profile }): mixed {
     case AppPathOption.profile:
       return profile;
     default:
-      throw new TypeError(`Unsupported path: ${appPath}!`);
+      throw new Error(`Unsupported path: ${appPath}!`);
   }
 }

@@ -14,12 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import { useValueByAppLanguage } from "../utils/AppLanguageUtils";
-import { useAppSignInUserInfoLoader } from "../utils/AppSignInUserUtils";
 import BoxNoUserDragOrSelect from "./common/BoxNoUserDragOrSelect.react";
 
 const backdropText = Object.freeze({
-  cn: "用户信息加载中...",
-  eng: "Loading User Information...",
+  cn: "努力加载中...",
+  eng: "Working Hard Loading...",
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -36,12 +35,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppSignInUserInfoLoader() {
+type Props = {
+  isLoading: boolean,
+};
+
+export default function AppLoadingBackdrop({ isLoading }: Props) {
   const classes = useStyles();
 
   const backdropTextByLanguage = useValueByAppLanguage(backdropText);
-
-  const { isLoading } = useAppSignInUserInfoLoader();
 
   return (
     <Backdrop className={classes.backdrop} open={isLoading}>
