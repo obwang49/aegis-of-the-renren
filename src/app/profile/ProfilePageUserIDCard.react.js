@@ -7,16 +7,12 @@
  */
 
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import Skeleton from "@material-ui/lab/Skeleton";
 
 import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import { useAppSignInUserInfo } from "../../utils/AppSignInUserUtils";
-import ProfilePageCardRefreshButton from "./ProfilePageCardRefreshButton.react";
+import ProfilePageInfoCard from "./ProfilePageInfoCard.react";
 
 const titleText = Object.freeze({
   cn: "用户 ID",
@@ -35,17 +31,11 @@ export default function ProfilePageUserIDCard() {
   };
 
   return (
-    <Card>
-      <CardHeader
-        action={<ProfilePageCardRefreshButton onClick={refresh} />}
-        avatar={
-          <Avatar>
-            <AccountBoxIcon />
-          </Avatar>
-        }
-        subheader={userID ?? <Skeleton animation="wave" width="40%" />}
-        title={titleTextByLanguage}
-      />
-    </Card>
+    <ProfilePageInfoCard
+      avatarIcon={<AccountBoxIcon />}
+      onRefresh={refresh}
+      subHeader={userID}
+      title={titleTextByLanguage}
+    />
   );
 }

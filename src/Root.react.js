@@ -23,6 +23,9 @@ import App from "./app/App.react";
  * + React Cookie
  *   - @usage: browser cookie interaction
  *   - @link: https://www.npmjs.com/package/react-cookie
+ * + React HTML Parser
+ *   - @usage: html text parsing & rendering
+ *   - @link: https://www.npmjs.com/package/react-html-parser
  * + React Router
  *   - @usage: browser rounting & navigation
  *   - @link: https://reactrouter.com/

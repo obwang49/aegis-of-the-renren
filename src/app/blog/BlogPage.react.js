@@ -14,19 +14,19 @@ import {
   useAppBlogList,
   useAppBlogListListener,
 } from "../../utils/AppBlogUtils";
+import AppLoadingBackdrop from "../AppLoadingBackdrop.react";
 import BlogPageBlogCard from "./BlogPageBlogCard.react";
 import BlogPageMenuDrawer from "./BlogPageMenuDrawer.react";
 
 const useStyles = makeStyles((theme) => ({
   page: {
     display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: "column",
     padding: theme.spacing(2),
+    paddingBottom: theme.spacing(8),
   },
   card: {
     margin: theme.spacing(1),
-    width: theme.spacing(50),
   },
 }));
 
@@ -41,11 +41,12 @@ export default function BlogPage() {
       <Box className={classes.page}>
         {blogList?.map((blog, index) => (
           <Box className={classes.card} key={index}>
-            <BlogPageBlogCard blog={blog} />
+            <BlogPageBlogCard blog={blog} index={index} />
           </Box>
         ))}
       </Box>
       <BlogPageMenuDrawer />
+      <AppLoadingBackdrop isLoading={isLoading} />
     </>
   );
 }
