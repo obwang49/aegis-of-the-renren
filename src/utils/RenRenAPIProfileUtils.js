@@ -26,7 +26,7 @@ export function useRenRenAPIProfileGet(
 ): {
   load: () => void,
   isLoading: boolean,
-  blogCount: number,
+  blogCount: ?number,
   error: mixed,
 } {
   const {
@@ -39,9 +39,8 @@ export function useRenRenAPIProfileGet(
     RENREN_API_REQUEST_METHOD_PROFILE_GET,
     { [RENREN_API_REQUEST_KEY_PROFILE_GET_USER_ID]: userID }
   );
-  const blogCount = data
-    ? data[RENREN_API_RESPONSE_KEY_PROFILE_GET_BLOG_COUNT]
-    : 0;
+  const blogCount =
+    data && data[RENREN_API_RESPONSE_KEY_PROFILE_GET_BLOG_COUNT];
 
   return { load, isLoading, blogCount, error };
 }

@@ -17,7 +17,7 @@ export const AppLanguageOption = Object.freeze({
 });
 const DEFAULT_APP_LANGUAGE_OPTION = AppLanguageOption.cn;
 
-function getValidAppLanguageOption(appLanguage: string): string {
+function getValidAppLanguageOption(appLanguage: string): AppLanguageOptionType {
   if (!appLanguage) {
     return DEFAULT_APP_LANGUAGE_OPTION;
   }

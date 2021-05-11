@@ -29,13 +29,18 @@ const validAppPathOptions = Object.freeze({
   ],
 });
 
-export function getValidAppPathOptions(accessToken: string): Array<string> {
+export function getValidAppPathOptions(
+  accessToken: string
+): Array<AppPathOptionType> {
   return accessToken
     ? validAppPathOptions.withAccessToken
     : validAppPathOptions.noAccessToken;
 }
 
-function getValidAppPathOption(appPath: string, accessToken: string): string {
+function getValidAppPathOption(
+  appPath: string,
+  accessToken: string
+): AppPathOptionType {
   const defaultAppPathOption = accessToken
     ? DEFAULT_APP_PATH_OPTION_WITH_ACCESS_TOKEN
     : DEFAULT_APP_PATH_OPTION_NO_ACCESS_TOKEN;

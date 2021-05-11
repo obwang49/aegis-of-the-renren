@@ -24,8 +24,8 @@ const RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_NAME = "name";
 export function useRenRenAPIUserLoginGet(): {
   load: () => void,
   isLoading: boolean,
-  userID: number,
-  userName: string,
+  userID: ?number,
+  userName: ?string,
   error: mixed,
 } {
   const { load, isLoading, data, error } = useRenRenAPIRequest(
@@ -33,10 +33,8 @@ export function useRenRenAPIUserLoginGet(): {
     RENREN_API_REQUEST_METHOD_USER_LOGIN_GET
   );
 
-  const userID = data ? data[RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_ID] : 0;
-  const userName = data
-    ? data[RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_NAME]
-    : "";
+  const userID = data && data[RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_ID];
+  const userName = data && data[RENREN_API_RESPONSE_KEY_USER_LOGIN_GET_NAME];
 
   return { load, isLoading, userID, userName, error };
 }

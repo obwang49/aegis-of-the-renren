@@ -15,6 +15,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 
+import { useAppAccessTokenSyncer } from "../utils/AppAccessTokenUtils";
 import {
   useAppLanguageSyncer,
   useValueByAppLanguage,
@@ -85,6 +86,7 @@ export default function App() {
     profile: <ProfilePage />,
   });
 
+  useAppAccessTokenSyncer();
   useAppLanguageSyncer();
   useAppPathSyncer();
   useAppThemeModeSyncer();
@@ -92,9 +94,7 @@ export default function App() {
   useRenRenOauthResponseListener();
 
   const { isLoading: isSignInUserInfoLoading } = useAppSignInUserInfoListener();
-  const {
-    isLoading: isProfileBlogCountLoading,
-  } = useAppProfileBlogCountListener();
+  useAppProfileBlogCountListener();
 
   console.log("!-!-!");
 
@@ -103,9 +103,7 @@ export default function App() {
       <Paper className={classes.page}>
         <NavBar />
         {appPage}
-        <AppLoadingBackdrop
-          isLoading={isSignInUserInfoLoading || isProfileBlogCountLoading}
-        />
+        <AppLoadingBackdrop isLoading={isSignInUserInfoLoading} />
       </Paper>
     </ThemeProvider>
   );

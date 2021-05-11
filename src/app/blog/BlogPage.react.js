@@ -7,13 +7,12 @@
  */
 
 import React from "react";
-import { useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
-  useAppBlogListLoader,
-  useAppBlogPageInfo,
+  useAppBlogList,
+  useAppBlogListListener,
 } from "../../utils/AppBlogUtils";
 import BlogPageBlogCard from "./BlogPageBlogCard.react";
 import BlogPageMenuDrawer from "./BlogPageMenuDrawer.react";
@@ -34,17 +33,13 @@ const useStyles = makeStyles((theme) => ({
 export default function BlogPage() {
   const classes = useStyles();
 
-  const { pageNumber, pageSize } = useAppBlogPageInfo();
-  const { load: loadPage, isLoading, blogs } = useAppBlogListLoader();
-
-  useEffect(() => {
-    loadPage();
-  }, [pageNumber, pageSize, loadPage]);
+  const { blogList } = useAppBlogList();
+  const { isLoading } = useAppBlogListListener();
 
   return (
     <>
       <Box className={classes.page}>
-        {blogs.map((blog, index) => (
+        {blogList?.map((blog, index) => (
           <Box className={classes.card} key={index}>
             <BlogPageBlogCard blog={blog} />
           </Box>

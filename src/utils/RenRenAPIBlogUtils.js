@@ -73,7 +73,7 @@ export function useRenRenAPIBlogList(
 ): {
   load: () => void,
   isLoading: boolean,
-  blogs: Array<Blog>,
+  blogList: ?Array<Blog>,
   error: mixed,
 } {
   const { load, isLoading, data, error } = useRenRenAPIRequest(
@@ -85,7 +85,7 @@ export function useRenRenAPIBlogList(
       [RENREN_API_REQUEST_KEY_PAGE_SIZE]: pageSize,
     }
   );
-  const blogs = data ? data : [];
+  const blogList = data;
 
-  return { load, isLoading, blogs, error };
+  return { load, isLoading, blogList, error };
 }

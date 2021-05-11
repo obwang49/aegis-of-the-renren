@@ -12,7 +12,11 @@ import Drawer from "@material-ui/core/Drawer";
 import TablePagination from "@material-ui/core/TablePagination";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { useAppBlogCount, useAppBlogPageInfo } from "../../utils/AppBlogUtils";
+import {
+  useAppBlogCount,
+  useAppBlogList,
+  useAppBlogPageInfo,
+} from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 
 const pageSizeLabelText = Object.freeze({
@@ -43,14 +47,17 @@ export default function BlogPageMenuDrawer({ loadPage }: Props) {
     pageSizeOptions,
   } = useAppBlogPageInfo();
 
+  const { removeBlogList } = useAppBlogList();
+
   const changePageNumber = (event: mixed, pageNumber: number) => {
     setPageNumber(pageNumber);
+    removeBlogList();
   };
 
   const changePageSize = (event: mixed) => {
     const newPageSize = event.target.value;
     setPageSize(newPageSize);
-    setPageNumber(0);
+    changePageNumber(null, 0);
   };
 
   return (

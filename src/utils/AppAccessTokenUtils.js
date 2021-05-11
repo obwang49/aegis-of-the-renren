@@ -13,19 +13,19 @@ import { atom, useRecoilState } from "recoil";
 
 import { useAppAccessTokenCookie } from "./AppCookieUtils";
 
-const AppAccessToken: RecoilState<string> = atom({
+const AppAccessToken: RecoilState<?string> = atom({
   key: "AppAccessToken",
-  default: "",
+  default: null,
 });
 
 export function useAppAccessToken(): {
-  accessToken: string,
-  setAccessToken: (string) => void,
+  accessToken: ?string,
+  setAccessToken: (?string) => void,
   removeAccessToken: () => void,
 } {
   const [accessToken, setAccessToken] = useRecoilState(AppAccessToken);
   const removeAccessToken = () => {
-    setAccessToken("");
+    setAccessToken(null);
   };
   return { accessToken, setAccessToken, removeAccessToken };
 }

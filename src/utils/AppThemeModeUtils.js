@@ -21,7 +21,7 @@ const DEFAULT_APP_THEME_MODE_OPTION = AppThemeModeOption.light;
 function getValidAppThemeModeOption(
   appThemeMode: string,
   isPrefersDarkMode: boolean
-): string {
+): AppThemeModeOptionType {
   if (!appThemeMode) {
     return isPrefersDarkMode
       ? AppThemeModeOption.dark

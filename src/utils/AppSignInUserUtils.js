@@ -13,29 +13,30 @@ import { atom, useRecoilState } from "recoil";
 
 import { useAppAccessToken } from "./AppAccessTokenUtils";
 import { useRenRenAPIUserLoginGet } from "./RenRenAPIUserUtils";
+import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
-const AppSignInUserID: RecoilState<number> = atom({
+const AppSignInUserID: RecoilState<?number> = atom({
   key: "AppSignInUserID",
-  default: 0,
+  default: null,
 });
 
-const AppSignInUserName: RecoilState<string> = atom({
+const AppSignInUserName: RecoilState<?string> = atom({
   key: "AppSignInUserName",
-  default: "--",
+  default: null,
 });
 
 export function useAppSignInUserInfo(): {
-  userID: number,
-  setUserID: (number) => void,
-  userName: string,
-  setUserName: (string) => void,
+  userID: ?number,
+  setUserID: (?number) => void,
+  userName: ?string,
+  setUserName: (?string) => void,
   removeUserInfo: () => void,
 } {
   const [userID, setUserID] = useRecoilState(AppSignInUserID);
   const [userName, setUserName] = useRecoilState(AppSignInUserName);
   const removeUserInfo = () => {
-    setUserID(0);
-    setUserName("");
+    setUserID(null);
+    setUserName(null);
   };
   return { userID, setUserID, userName, setUserName, removeUserInfo };
 }
@@ -61,7 +62,7 @@ export function useAppSignInUserInfoLoader(): {
   };
 
   useEffect(() => {
-    if (!userID || !userName) {
+    if (userID === null || userName === null) {
       return;
     }
     setUserID(userID);
@@ -79,7 +80,7 @@ export function useAppSignInUserInfoListener(): { isLoading: boolean } {
   const { userID } = useAppSignInUserInfo();
 
   useEffect(() => {
-    if (isLoading || userID) {
+    if (isLoading || userID !== null) {
       return;
     }
     load();
@@ -91,11 +92,11 @@ export function useAppSignInUserInfoListener(): { isLoading: boolean } {
 export function useAppSignInUserSignOut(): {
   signOut: () => void,
 } {
-  const { removeAccessToken } = useAppAccessToken();
+  const { removeAppAccessToken } = useRenRenOauthInfo();
   const { removeUserInfo } = useAppSignInUserInfo();
 
   const signOut = () => {
-    removeAccessToken();
+    removeAppAccessToken();
     removeUserInfo();
   };
   return { signOut };

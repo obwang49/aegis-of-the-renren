@@ -13,8 +13,8 @@ const APP_PATH_URL_SEARCH_PARAM_KEY = "path";
 function useAppURLSearchParam(
   key: string
 ): {
-  param: string,
-  setParam: (string) => void,
+  param: ?string,
+  setParam: (?string) => void,
 } {
   const history = useHistory();
   const location = useLocation();
@@ -22,7 +22,7 @@ function useAppURLSearchParam(
   const { search } = location;
   const allParams = new URLSearchParams(search);
 
-  const param = allParams.get(key) ?? "";
+  const param = allParams.get(key);
   const setParam = (value: ?string) => {
     if (value) {
       allParams.set(key, value);
@@ -35,8 +35,8 @@ function useAppURLSearchParam(
 }
 
 export function useAppPathURLSearchParam(): {
-  appPathURLSearchParam: string,
-  setAppPathURLSearchParam: (string) => void,
+  appPathURLSearchParam: ?string,
+  setAppPathURLSearchParam: (?string) => void,
 } {
   const {
     param: appPathURLSearchParam,

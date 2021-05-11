@@ -9,9 +9,9 @@
 import type { RecoilState } from "recoil";
 import type { Blog } from "./RenRenAPIBlogUtils";
 
+import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
-import { useAppAccessToken } from "./AppAccessTokenUtils";
 import { useAppSignInUserInfo } from "./AppSignInUserUtils";
 
 import {
@@ -19,9 +19,9 @@ import {
   useRenRenAPIBlogList,
 } from "./RenRenAPIBlogUtils";
 
-const AppBlogCount: RecoilState<number> = atom({
+const AppBlogCount: RecoilState<?number> = atom({
   key: "AppBlogCount",
-  default: 0,
+  default: null,
 });
 
 const AppBlogPageNumber: RecoilState<number> = atom({
@@ -34,14 +34,19 @@ const AppBlogPageSize: RecoilState<number> = atom({
   default: RENREN_API_REQUEST_VALUE_PAGE_SIZE_DEFAULT,
 });
 
+const AppBlogList: RecoilState<?Array<Blog>> = atom({
+  key: "AppBlogList",
+  default: null,
+});
+
 export function useAppBlogCount(): {
-  blogCount: number,
-  setBlogCount: (number) => void,
+  blogCount: ?number,
+  setBlogCount: (?number) => void,
   removeBlogCount: () => void,
 } {
   const [blogCount, setBlogCount] = useRecoilState(AppBlogCount);
   const removeBlogCount = () => {
-    setBlogCount(0);
+    setBlogCount(null);
   };
   return { blogCount, setBlogCount, removeBlogCount };
 }
@@ -71,29 +76,65 @@ export function useAppBlogPageInfo(): {
   };
 }
 
-export function useAppBlogListLoader(): {
+export function useAppBlogList(): {
+  blogList: ?Array<Blog>,
+  setBlogList: (?Array<Blog>) => void,
+  removeBlogList: () => void,
+} {
+  const [blogList, setBlogList] = useRecoilState(AppBlogList);
+  const removeBlogList = () => {
+    setBlogList(null);
+  };
+  return { blogList, setBlogList, removeBlogList };
+}
+
+function useAppBlogListLoader(): {
   load: () => void,
   isLoading: boolean,
-  blogs: Array<Blog>,
   error: mixed,
 } {
-  const { accessToken } = useAppAccessToken();
   const { userID } = useAppSignInUserInfo();
   const { pageNumber, pageSize } = useAppBlogPageInfo();
   const pageNumberForRenRenAPI = pageNumber + 1;
 
-  const { load: loadData, isLoading, blogs, error } = useRenRenAPIBlogList(
+  const { load: loadData, isLoading, blogList, error } = useRenRenAPIBlogList(
     userID,
     pageNumberForRenRenAPI,
     pageSize
   );
 
+  const { setBlogList, removeBlogList } = useAppBlogList();
+
   const load = () => {
-    if (!accessToken || !userID || !pageNumberForRenRenAPI || !pageSize) {
-      return;
-    }
+    removeBlogList();
     loadData();
   };
 
-  return { load, isLoading, blogs, error };
+  useEffect(() => {
+    if (blogList === null) {
+      return;
+    }
+    setBlogList(blogList);
+  }, [blogList, setBlogList]);
+
+  return { load, isLoading, error };
+}
+
+export function useAppBlogListListener(): {
+  isLoading: boolean,
+} {
+  const { pageNumber, pageSize } = useAppBlogPageInfo();
+
+  const { load, isLoading } = useAppBlogListLoader();
+
+  const { blogList } = useAppBlogList();
+
+  useEffect(() => {
+    if (isLoading || blogList !== null) {
+      return;
+    }
+    load();
+  }, [pageNumber, pageSize, isLoading, blogList, load]);
+
+  return { isLoading };
 }

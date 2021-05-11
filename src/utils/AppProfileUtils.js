@@ -34,7 +34,7 @@ export function useAppProfileBlogCountLoader(): {
   };
 
   useEffect(() => {
-    if (!blogCount) {
+    if (blogCount === null) {
       return;
     }
     setBlogCount(blogCount);
@@ -51,7 +51,7 @@ export function useAppProfileBlogCountListener(): { isLoading: boolean } {
   const { blogCount } = useAppBlogCount();
 
   useEffect(() => {
-    if (isLoading || blogCount) {
+    if (isLoading || blogCount !== null) {
       return;
     }
     load();

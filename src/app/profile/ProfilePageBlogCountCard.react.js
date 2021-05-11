@@ -11,6 +11,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import DescriptionIcon from "@material-ui/icons/Description";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
@@ -35,7 +36,7 @@ export default function ProfilePageBlogCountCard() {
             <DescriptionIcon />
           </Avatar>
         }
-        subheader={blogCount}
+        subheader={blogCount ?? <Skeleton animation="wave" width="40%" />}
         title={titleTextByLanguage}
       />
     </Card>
