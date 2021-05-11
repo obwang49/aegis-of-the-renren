@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/aegis-of-the-renren/static/css/main.6017089e.chunk.css",
-    "main.js": "/aegis-of-the-renren/static/js/main.29044441.chunk.js",
-    "main.js.map": "/aegis-of-the-renren/static/js/main.29044441.chunk.js.map",
+    "main.js": "/aegis-of-the-renren/static/js/main.ccbb994e.chunk.js",
+    "main.js.map": "/aegis-of-the-renren/static/js/main.ccbb994e.chunk.js.map",
     "runtime-main.js": "/aegis-of-the-renren/static/js/runtime-main.d537c4a4.js",
     "runtime-main.js.map": "/aegis-of-the-renren/static/js/runtime-main.d537c4a4.js.map",
     "static/js/2.f50fee6b.chunk.js": "/aegis-of-the-renren/static/js/2.f50fee6b.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.d537c4a4.js",
     "static/js/2.f50fee6b.chunk.js",
     "static/css/main.6017089e.chunk.css",
-    "static/js/main.29044441.chunk.js"
+    "static/js/main.ccbb994e.chunk.js"
   ]
 }
