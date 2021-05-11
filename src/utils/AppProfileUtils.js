@@ -11,51 +11,51 @@ import { useEffect } from "react";
 import { useAppBlogCount } from "./AppBlogUtils";
 import { useAppSignInUserInfo } from "./AppSignInUserUtils";
 import { useRenRenAPIProfileGet } from "./RenRenAPIProfileUtils";
-import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
 export function useAppProfileBlogCountLoader(): {
   load: () => void,
-} {
-  const { setBlogCount } = useAppBlogCount();
-
-  const load = () => {
-    setBlogCount(0);
-  };
-
-  return { load };
-}
-
-export function useAppProfileBlogCountListener(): {
   isLoading: boolean,
   error: mixed,
 } {
-  const { accessToken } = useRenRenOauthInfo();
   const { userID } = useAppSignInUserInfo();
 
   const {
     load: loadData,
     isLoading,
-    blogCount: newBlogCount,
+    blogCount,
     error,
   } = useRenRenAPIProfileGet(userID);
 
-  const { blogCount, setBlogCount } = useAppBlogCount();
-  const { load } = useAppProfileBlogCountLoader();
+  const { setBlogCount, removeBlogCount } = useAppBlogCount();
+
+  const load = () => {
+    removeBlogCount();
+    loadData();
+  };
 
   useEffect(() => {
-    if (!accessToken || !userID || isLoading || blogCount || error) {
+    if (!blogCount) {
+      return;
+    }
+    setBlogCount(blogCount);
+  }, [blogCount, setBlogCount]);
+
+  return { load, isLoading, error };
+}
+
+export function useAppProfileBlogCountListener(): { isLoading: boolean } {
+  const { userID } = useAppSignInUserInfo();
+
+  const { load, isLoading } = useAppProfileBlogCountLoader();
+
+  const { blogCount } = useAppBlogCount();
+
+  useEffect(() => {
+    if (isLoading || blogCount) {
       return;
     }
     load();
-    loadData();
-  }, [accessToken, userID, isLoading, blogCount, error, load, loadData]);
+  }, [userID, isLoading, blogCount, load]);
 
-  useEffect(() => {
-    if (!newBlogCount) {
-      return;
-    }
-    setBlogCount(newBlogCount);
-  }, [newBlogCount, setBlogCount]);
-
-  return { isLoading, error };
+  return { isLoading };
 }

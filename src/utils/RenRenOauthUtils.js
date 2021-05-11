@@ -6,7 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { useAppAccessTokenCookie } from "./AppCookieUtils";
@@ -148,23 +148,20 @@ export function useRenRenOauthInfo(): {
     removeAppAccessTokenCookie,
   } = useAppAccessTokenCookie();
 
-  const setAccessToken = useCallback(
-    (newOauthInfo: RenRenOauthInfo) => {
-      const {
-        [RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN]: newAccessToken,
-        [RENREN_OAUTH_RESPONSE_KEY_EXPIRES_IN]: newExpiresIn,
-      } = newOauthInfo;
+  const setAccessToken = (newOauthInfo: RenRenOauthInfo) => {
+    const {
+      [RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN]: newAccessToken,
+      [RENREN_OAUTH_RESPONSE_KEY_EXPIRES_IN]: newExpiresIn,
+    } = newOauthInfo;
 
-      if (!newAccessToken) {
-        removeAppAccessTokenCookie();
-      } else {
-        setAppAccessTokenCookie(newAccessToken, {
-          maxAge: newExpiresIn,
-        });
-      }
-    },
-    [removeAppAccessTokenCookie, setAppAccessTokenCookie]
-  );
+    if (!newAccessToken) {
+      removeAppAccessTokenCookie();
+    } else {
+      setAppAccessTokenCookie(newAccessToken, {
+        maxAge: newExpiresIn,
+      });
+    }
+  };
 
   return {
     accessToken: appAccessTokenCookie,

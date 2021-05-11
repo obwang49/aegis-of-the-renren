@@ -6,7 +6,6 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useCallback } from "react";
 import { useCookies } from "react-cookie";
 
 const APP_ACCESS_TOKEN_COOKIE_NAME = "access_token";
@@ -33,16 +32,13 @@ function useAppCookieByName(
   const [appCookies, setAppCookie, removeAppCookie] = useCookies([name]);
 
   const cookie = appCookies[name] ?? "";
-  const setCookie = useCallback(
-    (value: string, option: CookieOptionType) => {
-      setAppCookie(name, value, { ...defaultAppCookieOption, ...option });
-    },
-    [name, setAppCookie]
-  );
-  const removeCookie = useCallback(() => {
-    removeAppCookie(name, defaultAppCookieOption);
-  }, [name, removeAppCookie]);
+  const setCookie = (value: string, option: CookieOptionType) => {
+    setAppCookie(name, value, { ...defaultAppCookieOption, ...option });
+  };
 
+  const removeCookie = () => {
+    removeAppCookie(name, defaultAppCookieOption);
+  };
   return { cookie, setCookie, removeCookie };
 }
 

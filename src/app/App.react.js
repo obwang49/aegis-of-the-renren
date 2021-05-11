@@ -21,7 +21,7 @@ import {
 } from "../utils/AppLanguageUtils";
 import { useAppPathSyncer, useValueByAppPath } from "../utils/AppPathUtils";
 import { useAppProfileBlogCountListener } from "../utils/AppProfileUtils";
-import { useAppSignInUserListener } from "../utils/AppSignInUserUtils";
+import { useAppSignInUserInfoListener } from "../utils/AppSignInUserUtils";
 import {
   useAppThemeMode,
   useAppThemeModeSyncer,
@@ -91,12 +91,12 @@ export default function App() {
 
   useRenRenOauthResponse();
 
-  const { isLoading: isSignInUserInfoLoading } = useAppSignInUserListener();
+  const { isLoading: isSignInUserInfoLoading } = useAppSignInUserInfoListener();
   const {
     isLoading: isProfileBlogCountLoading,
   } = useAppProfileBlogCountListener();
 
-  console.log("!!!");
+  console.log("!--!");
 
   return (
     <ThemeProvider theme={appTheme}>

@@ -8,7 +8,7 @@
 
 import type { RecoilState } from "recoil";
 
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
 import { useRenRenAPIUserLoginGet } from "./RenRenAPIUserUtils";
@@ -21,7 +21,7 @@ const AppSignInUserID: RecoilState<number> = atom({
 
 const AppSignInUserName: RecoilState<string> = atom({
   key: "AppSignInUserName",
-  default: "",
+  default: "--",
 });
 
 export function useAppSignInUserInfo(): {
@@ -33,61 +33,59 @@ export function useAppSignInUserInfo(): {
 } {
   const [userID, setUserID] = useRecoilState(AppSignInUserID);
   const [userName, setUserName] = useRecoilState(AppSignInUserName);
-  const removeUserInfo = useCallback(() => {
+  const removeUserInfo = () => {
     setUserID(0);
     setUserName("");
-  }, [setUserID, setUserName]);
+  };
   return { userID, setUserID, userName, setUserName, removeUserInfo };
 }
 
 export function useAppSignInUserInfoLoader(): {
   load: () => void,
-} {
-  const { removeUserInfo } = useAppSignInUserInfo();
-  const load = () => {
-    removeUserInfo();
-  };
-
-  return { load };
-}
-
-export function useAppSignInUserListener(): {
   isLoading: boolean,
   error: mixed,
 } {
-  const { accessToken } = useRenRenOauthInfo();
-
   const {
     load: loadData,
     isLoading,
-    userID: newUserID,
-    userName: newUserName,
+    userID,
+    userName,
     error,
   } = useRenRenAPIUserLoginGet();
 
-  const { userID, setUserID, userName, setUserName } = useAppSignInUserInfo();
-  const { load } = useAppSignInUserInfoLoader();
+  const { setUserID, setUserName, removeUserInfo } = useAppSignInUserInfo();
+
+  const load = () => {
+    removeUserInfo();
+    loadData();
+  };
 
   useEffect(() => {
-    if (!accessToken || isLoading || userID || userName || error) {
-      console.log("jjj");
-      console.log({ accessToken });
-      console.log("skip!");
+    if (!userID || !userName) {
+      return;
+    }
+    setUserID(userID);
+    setUserName(userName);
+  }, [userID, userName, setUserID, setUserName]);
+
+  return { load, isLoading, error };
+}
+
+export function useAppSignInUserInfoListener(): { isLoading: boolean } {
+  const { accessToken } = useRenRenOauthInfo();
+
+  const { load, isLoading } = useAppSignInUserInfoLoader();
+
+  const { userID } = useAppSignInUserInfo();
+
+  useEffect(() => {
+    if (isLoading || userID) {
       return;
     }
     load();
-    loadData();
-  }, [accessToken, isLoading, userID, userName, error, load, loadData]);
+  }, [accessToken, isLoading, userID, load]);
 
-  useEffect(() => {
-    if (!newUserID || !newUserName) {
-      return;
-    }
-    setUserID(newUserID);
-    setUserName(newUserName);
-  }, [newUserID, newUserName, setUserID, setUserName]);
-
-  return { isLoading, error };
+  return { isLoading };
 }
 
 export function useAppSignInUserSignOut(): {
@@ -96,9 +94,9 @@ export function useAppSignInUserSignOut(): {
   const { removeAccessToken } = useRenRenOauthInfo();
   const { removeUserInfo } = useAppSignInUserInfo();
 
-  const signOut = useCallback(() => {
+  const signOut = () => {
     removeAccessToken();
     removeUserInfo();
-  }, [removeAccessToken, removeUserInfo]);
+  };
   return { signOut };
 }

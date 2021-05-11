@@ -9,7 +9,6 @@
 import type { RecoilState } from "recoil";
 import type { Blog } from "./RenRenAPIBlogUtils";
 
-import { useCallback, useMemo } from "react";
 import { atom, useRecoilState } from "recoil";
 
 import { useAppSignInUserInfo } from "./AppSignInUserUtils";
@@ -38,22 +37,13 @@ const AppBlogPageSize: RecoilState<number> = atom({
 export function useAppBlogCount(): {
   blogCount: number,
   setBlogCount: (number) => void,
+  removeBlogCount: () => void,
 } {
   const [blogCount, setBlogCount] = useRecoilState(AppBlogCount);
-  return { blogCount, setBlogCount };
-}
-
-export function useAppProfileBlogCountLoader(): {
-  load: () => void,
-  isLoading: boolean,
-} {
-  const { setBlogCount } = useAppBlogCount();
-
-  const load = () => {
+  const removeBlogCount = () => {
     setBlogCount(0);
   };
-
-  return { load };
+  return { blogCount, setBlogCount, removeBlogCount };
 }
 
 function getPageSizeOptions(): Array<number> {
@@ -90,9 +80,7 @@ export function useAppBlogListLoader(): {
   const { accessToken } = useRenRenOauthInfo();
   const { userID } = useAppSignInUserInfo();
   const { pageNumber, pageSize } = useAppBlogPageInfo();
-  const pageNumberForRenRenAPI = useMemo(() => {
-    return pageNumber + 1;
-  }, [pageNumber]);
+  const pageNumberForRenRenAPI = pageNumber + 1;
 
   const { load: loadData, isLoading, blogs, error } = useRenRenAPIBlogList(
     userID,
@@ -100,12 +88,12 @@ export function useAppBlogListLoader(): {
     pageSize
   );
 
-  const load = useCallback(() => {
+  const load = () => {
     if (!accessToken || !userID || !pageNumberForRenRenAPI || !pageSize) {
       return;
     }
     loadData();
-  }, [accessToken, userID, pageNumberForRenRenAPI, pageSize, loadData]);
+  };
 
   return { load, isLoading, blogs, error };
 }

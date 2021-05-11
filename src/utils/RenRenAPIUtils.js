@@ -6,7 +6,7 @@
  * @author: obwang49 <obwang49@gmail.com>
  */
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
@@ -79,14 +79,16 @@ export function useRenRenAPIRequest(
 
   const requestURL = getRenRenAPIRequestURL(accessToken, path, params);
 
-  const load = useCallback(() => {
+  const load = () => {
+    if (!requestURL) {
+      return;
+    }
+
     setData(null);
     setError(null);
     setIsLoading(true);
 
-    if (!requestURL) {
-      setError({ code: 404 });
-    }
+    console.log("+++");
 
     fetch(requestURL, { method })
       .then((response) => response.json())
@@ -100,7 +102,7 @@ export function useRenRenAPIRequest(
         setError(error);
         setIsLoading(false);
       });
-  }, [requestURL, method, setData, setError, setIsLoading]);
+  };
 
   return { load, isLoading, data, error };
 }

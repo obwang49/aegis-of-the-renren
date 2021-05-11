@@ -12,12 +12,9 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
+import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
-import { useAppProfileBlogCountLoader } from "../../utils/AppProfileUtils";
-import {
-  useAppSignInUserInfo,
-  useAppSignInUserInfoLoader,
-} from "../../utils/AppSignInUserUtils";
+import { useAppSignInUserInfo } from "../../utils/AppSignInUserUtils";
 import ProfilePageCardRefreshButton from "./ProfilePageCardRefreshButton.react";
 
 const titleText = Object.freeze({
@@ -28,13 +25,12 @@ const titleText = Object.freeze({
 export default function ProfilePageUserNameCard() {
   const titleTextByLanguage = useValueByAppLanguage(titleText);
 
-  const { userName } = useAppSignInUserInfo();
-  const { load: loadSignInUserInfo } = useAppSignInUserInfoLoader();
-  const { load: loadProfileBlogCount } = useAppProfileBlogCountLoader();
+  const { userName, removeUserInfo } = useAppSignInUserInfo();
+  const { removeBlogCount } = useAppBlogCount();
 
   const refresh = () => {
-    loadSignInUserInfo();
-    loadProfileBlogCount();
+    removeUserInfo();
+    removeBlogCount();
   };
 
   return (

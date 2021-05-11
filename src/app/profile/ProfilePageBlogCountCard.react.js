@@ -14,7 +14,6 @@ import DescriptionIcon from "@material-ui/icons/Description";
 
 import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
-import { useAppProfileBlogCountLoader } from "../../utils/AppProfileUtils";
 import ProfilePageCardRefreshButton from "./ProfilePageCardRefreshButton.react";
 
 const titleText = Object.freeze({
@@ -25,17 +24,12 @@ const titleText = Object.freeze({
 export default function ProfilePageBlogCountCard() {
   const titleTextByLanguage = useValueByAppLanguage(titleText);
 
-  const { blogCount } = useAppBlogCount();
-  const { load: loadProfileBlogCount } = useAppProfileBlogCountLoader();
-
-  const refresh = () => {
-    loadProfileBlogCount();
-  };
+  const { blogCount, removeBlogCount } = useAppBlogCount();
 
   return (
     <Card>
       <CardHeader
-        action={<ProfilePageCardRefreshButton onClick={refresh} />}
+        action={<ProfilePageCardRefreshButton onClick={removeBlogCount} />}
         avatar={
           <Avatar>
             <DescriptionIcon />
