@@ -70,6 +70,9 @@ export function useAppSignInUserListener(): {
 
   useEffect(() => {
     if (!accessToken || isLoading || userID || userName || error) {
+      console.log("jjj");
+      console.log({ accessToken });
+      console.log("skip!");
       return;
     }
     load();

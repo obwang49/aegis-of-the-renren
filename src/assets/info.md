@@ -11,7 +11,8 @@ This folder contains all the assets being used in this project, where as the org
 + language_eng.svg
   - @original: united-states-of-america.svg
   - @link: https://www.tomedes.com/language-translation-service.php
-+ logo.jpg
++ logo.png
+  - @design: stored in the design folder under originals
   - @original: aegis-of-the-immortal.jpg
   - @link: https://dota.fandom.com/wiki/Aegis_of_the_Immortal
 + sign_in.png

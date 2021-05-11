@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { styleNoUserDragOrSelect } from "../common/BoxNoUserDragOrSelect.react";
 
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo.png";
 
 export const useStyles = makeStyles((theme) => ({
   img: styleNoUserDragOrSelect,
