@@ -14,11 +14,11 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import HomeIcon from "@material-ui/icons/Home";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 
+import { useAppAccessToken } from "../../utils/AppAccessTokenUtils";
 import {
   AppPathOption,
   getValidAppPathOptions,
 } from "../../utils/AppPathUtils";
-import { useRenRenOauthInfo } from "../../utils/RenRenOauthUtils";
 import NavBarAppSideDrawerPageListItem from "./NavBarAppSideDrawerPageListItem.react";
 
 const pageListItems = Object.freeze({
@@ -61,7 +61,7 @@ type Props = {
 };
 
 export default function NavBarAppSideDrawerPageList({ onClose }: Props) {
-  const { accessToken } = useRenRenOauthInfo();
+  const { accessToken } = useAppAccessToken();
   const validAppPathOptions = getValidAppPathOptions(accessToken);
   const validPageListItmes = useMemo(() => {
     return Object.values(pageListItems).filter((page) =>

@@ -8,7 +8,7 @@
 
 import { useState } from "react";
 
-import { useRenRenOauthInfo } from "./RenRenOauthUtils";
+import { useAppAccessToken } from "./AppAccessTokenUtils";
 
 /**
  * RenRen API 2.0 Overview
@@ -71,7 +71,7 @@ export function useRenRenAPIRequest(
   data: mixed,
   error: mixed,
 } {
-  const { accessToken } = useRenRenOauthInfo();
+  const { accessToken } = useAppAccessToken();
 
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);

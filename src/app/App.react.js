@@ -26,7 +26,7 @@ import {
   useAppThemeMode,
   useAppThemeModeSyncer,
 } from "../utils/AppThemeModeUtils";
-import { useRenRenOauthResponse } from "../utils/RenRenOauthUtils";
+import { useRenRenOauthResponseListener } from "../utils/RenRenOauthUtils";
 import BlogPage from "./blog/BlogPage.react";
 import HomePage from "./home/HomePage.react";
 import NavBar from "./nav/NavBar.react";
@@ -89,14 +89,14 @@ export default function App() {
   useAppPathSyncer();
   useAppThemeModeSyncer();
 
-  useRenRenOauthResponse();
+  useRenRenOauthResponseListener();
 
   const { isLoading: isSignInUserInfoLoading } = useAppSignInUserInfoListener();
   const {
     isLoading: isProfileBlogCountLoading,
   } = useAppProfileBlogCountListener();
 
-  console.log("!--!");
+  console.log("!-!-!");
 
   return (
     <ThemeProvider theme={appTheme}>

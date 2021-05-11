@@ -11,8 +11,8 @@ import type { RecoilState } from "recoil";
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
+import { useAppAccessToken } from "./AppAccessTokenUtils";
 import { useRenRenAPIUserLoginGet } from "./RenRenAPIUserUtils";
-import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
 const AppSignInUserID: RecoilState<number> = atom({
   key: "AppSignInUserID",
@@ -72,7 +72,7 @@ export function useAppSignInUserInfoLoader(): {
 }
 
 export function useAppSignInUserInfoListener(): { isLoading: boolean } {
-  const { accessToken } = useRenRenOauthInfo();
+  const { accessToken } = useAppAccessToken();
 
   const { load, isLoading } = useAppSignInUserInfoLoader();
 
@@ -91,7 +91,7 @@ export function useAppSignInUserInfoListener(): { isLoading: boolean } {
 export function useAppSignInUserSignOut(): {
   signOut: () => void,
 } {
-  const { removeAccessToken } = useRenRenOauthInfo();
+  const { removeAccessToken } = useAppAccessToken();
   const { removeUserInfo } = useAppSignInUserInfo();
 
   const signOut = () => {

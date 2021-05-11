@@ -11,8 +11,8 @@ import type { Blog } from "./RenRenAPIBlogUtils";
 
 import { atom, useRecoilState } from "recoil";
 
+import { useAppAccessToken } from "./AppAccessTokenUtils";
 import { useAppSignInUserInfo } from "./AppSignInUserUtils";
-import { useRenRenOauthInfo } from "./RenRenOauthUtils";
 
 import {
   RENREN_API_REQUEST_VALUE_PAGE_SIZE_DEFAULT,
@@ -77,7 +77,7 @@ export function useAppBlogListLoader(): {
   blogs: Array<Blog>,
   error: mixed,
 } {
-  const { accessToken } = useRenRenOauthInfo();
+  const { accessToken } = useAppAccessToken();
   const { userID } = useAppSignInUserInfo();
   const { pageNumber, pageSize } = useAppBlogPageInfo();
   const pageNumberForRenRenAPI = pageNumber + 1;

@@ -8,7 +8,7 @@
 
 import { useEffect } from "react";
 
-import { useRenRenOauthInfo } from "../utils/RenRenOauthUtils";
+import { useAppAccessToken } from "./AppAccessTokenUtils";
 import { useAppPathURLSearchParam } from "./AppURLSearchParamUtils";
 
 export type AppPathOptionType = "blog" | "faq" | "home" | "profile";
@@ -59,7 +59,7 @@ export function useAppPath(): {
     setAppPathURLSearchParam,
   } = useAppPathURLSearchParam();
 
-  const { accessToken } = useRenRenOauthInfo();
+  const { accessToken } = useAppAccessToken();
 
   const appPath = getValidAppPathOption(appPathURLSearchParam, accessToken);
 

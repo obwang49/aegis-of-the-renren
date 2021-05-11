@@ -9,6 +9,7 @@
 import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
+import { useAppAccessToken } from "./AppAccessTokenUtils";
 import { useAppAccessTokenCookie } from "./AppCookieUtils";
 
 /**
@@ -118,11 +119,11 @@ function parseRenRenOauthResponseURLHash(hash: string): RenRenOauthInfo {
   };
 }
 
-export function useRenRenOauthResponse(): void {
+export function useRenRenOauthResponseListener(): void {
   const history = useHistory();
   const location = useLocation();
 
-  const { setAccessToken } = useRenRenOauthInfo();
+  const { setAppAccessToken } = useRenRenOauthInfo();
 
   useEffect(() => {
     const { hash } = location;
@@ -131,41 +132,47 @@ export function useRenRenOauthResponse(): void {
     }
 
     const oauthInfo = parseRenRenOauthResponseURLHash(hash);
-    setAccessToken(oauthInfo);
+    setAppAccessToken(oauthInfo);
 
     history.replace({ ...location, hash: "" });
-  }, [location, setAccessToken, history]);
+  }, [location, setAppAccessToken, history]);
 }
 
 export function useRenRenOauthInfo(): {
-  accessToken: string,
-  setAccessToken: (RenRenOauthInfo) => void,
-  removeAccessToken: () => void,
+  setAppAccessToken: (RenRenOauthInfo) => void,
+  removeAppAccessToken: () => void,
 } {
   const {
-    appAccessTokenCookie,
     setAppAccessTokenCookie,
     removeAppAccessTokenCookie,
   } = useAppAccessTokenCookie();
 
-  const setAccessToken = (newOauthInfo: RenRenOauthInfo) => {
+  const { setAccessToken, removeAccessToken } = useAppAccessToken();
+
+  const setAppAccessToken = (newOauthInfo: RenRenOauthInfo) => {
     const {
-      [RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN]: newAccessToken,
-      [RENREN_OAUTH_RESPONSE_KEY_EXPIRES_IN]: newExpiresIn,
+      [RENREN_OAUTH_RESPONSE_KEY_ACCESS_TOKEN]: accessToken,
+      [RENREN_OAUTH_RESPONSE_KEY_EXPIRES_IN]: expiresIn,
     } = newOauthInfo;
 
-    if (!newAccessToken) {
+    if (!accessToken) {
       removeAppAccessTokenCookie();
+      removeAccessToken();
     } else {
-      setAppAccessTokenCookie(newAccessToken, {
-        maxAge: newExpiresIn,
+      setAppAccessTokenCookie(accessToken, {
+        maxAge: expiresIn,
       });
+      setAccessToken(accessToken);
     }
   };
 
+  const removeAppAccessToken = () => {
+    removeAppAccessTokenCookie();
+    removeAccessToken();
+  };
+
   return {
-    accessToken: appAccessTokenCookie,
-    setAccessToken,
-    removeAccessToken: removeAppAccessTokenCookie,
+    setAppAccessToken,
+    removeAppAccessToken,
   };
 }
