@@ -23,12 +23,13 @@ type Props = {
   text: string,
 };
 
-export default function BlogPageBlogCardCopyButton({ text }: Props) {
+export default function BlogPageBlogCardHeaderCopyButton({ text }: Props) {
   const copyTooltipTextByLanguage = useValueByAppLanguage(copyTooltipText);
 
   return (
     <Tooltip
       arrow
+      disabled
       placement="bottom"
       title={copyTooltipTextByLanguage}
       TransitionComponent={Zoom}

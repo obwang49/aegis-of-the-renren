@@ -16,6 +16,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import ProfilePageCardRefreshButton from "./ProfilePageCardRefreshButton.react";
 
 type Props = {
+  action: React.Node,
   avatarIcon: React.Node,
   onRefresh: () => void,
   subHeader: string,
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export default function ProfilePageInfoCard({
+  action,
   avatarIcon,
   onRefresh,
   subHeader,
@@ -31,10 +33,15 @@ export default function ProfilePageInfoCard({
   return (
     <Card>
       <CardHeader
-        action={<ProfilePageCardRefreshButton onClick={onRefresh} />}
+        action={
+          <>
+            {action}
+            <ProfilePageCardRefreshButton onClick={onRefresh} />
+          </>
+        }
         avatar={<Avatar>{avatarIcon}</Avatar>}
         subheader={
-          <Typography variant="h6">
+          <Typography variant="h5">
             {subHeader ?? <Skeleton animation="wave" width="40%" />}
           </Typography>
         }

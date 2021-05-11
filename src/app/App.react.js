@@ -10,8 +10,8 @@ import React from "react";
 import { cyan, deepOrange } from "@material-ui/core/colors";
 import {
   createMuiTheme,
-  responsiveFontSizes,
   makeStyles,
+  responsiveFontSizes,
   ThemeProvider,
 } from "@material-ui/core/styles";
 

@@ -10,21 +10,26 @@ import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
-import RefreshIcon from "@material-ui/icons/Refresh";
+import OpenInBrowserIcon from "@material-ui/icons/OpenInBrowser";
 
+import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
+import { AppPathOption, useAppPath } from "../../utils/AppPathUtils";
 
 const tooltipText = Object.freeze({
-  cn: "刷新数据",
-  eng: "Refresh data",
+  cn: "前往查看",
+  eng: "Checkout Now",
 });
 
-type Props = {
-  onClick: () => void,
-};
-
-export default function ProfilePageCardRefreshButton({ onClick }: Props) {
+export default function ProfilePageBlogCountCardCheckoutButton() {
   const tooltipTextByLanguage = useValueByAppLanguage(tooltipText);
+
+  const { blogCount } = useAppBlogCount();
+
+  const { setAppPath } = useAppPath();
+  const openBlogPage = () => {
+    setAppPath(AppPathOption.blog);
+  };
 
   return (
     <Tooltip
@@ -33,8 +38,8 @@ export default function ProfilePageCardRefreshButton({ onClick }: Props) {
       title={tooltipTextByLanguage}
       TransitionComponent={Zoom}
     >
-      <IconButton onClick={onClick}>
-        <RefreshIcon />
+      <IconButton disabled={!blogCount} onClick={openBlogPage}>
+        <OpenInBrowserIcon />
       </IconButton>
     </Tooltip>
   );

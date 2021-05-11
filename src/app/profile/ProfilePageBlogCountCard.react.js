@@ -12,6 +12,7 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import { useAppBlogCount } from "../../utils/AppBlogUtils";
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import ProfilePageInfoCard from "./ProfilePageInfoCard.react";
+import ProfilePageBlogCountCardCheckoutButton from "./ProfilePageBlogCountCardCheckoutButton.react";
 
 const titleText = Object.freeze({
   cn: "发布的日志数",
@@ -25,6 +26,7 @@ export default function ProfilePageBlogCountCard() {
 
   return (
     <ProfilePageInfoCard
+      action={<ProfilePageBlogCountCardCheckoutButton />}
       avatarIcon={<DescriptionIcon />}
       onRefresh={removeBlogCount}
       subHeader={blogCount}
