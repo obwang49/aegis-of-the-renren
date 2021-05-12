@@ -10,7 +10,6 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import FAQPageFAQCard from "./FAQPageFAQCard.react";
 import { faqItems } from "./FAQPageFAQItems";
 

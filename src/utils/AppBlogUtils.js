@@ -111,7 +111,7 @@ function useAppBlogListLoader(): {
   };
 
   useEffect(() => {
-    if (blogList === null) {
+    if (blogList == null) {
       return;
     }
     setBlogList(blogList);
@@ -130,7 +130,7 @@ export function useAppBlogListListener(): {
   const { blogList } = useAppBlogList();
 
   useEffect(() => {
-    if (isLoading || blogList !== null) {
+    if (isLoading || blogList != null) {
       return;
     }
     load();

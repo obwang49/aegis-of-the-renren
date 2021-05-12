@@ -38,10 +38,16 @@ export function useAppSignInUserInfo(): {
     setUserID(null);
     setUserName(null);
   };
-  return { userID, setUserID, userName, setUserName, removeUserInfo };
+  return {
+    userID,
+    setUserID,
+    userName,
+    setUserName,
+    removeUserInfo,
+  };
 }
 
-export function useAppSignInUserInfoLoader(): {
+function useAppSignInUserInfoLoader(): {
   load: () => void,
   isLoading: boolean,
   error: mixed,
@@ -62,12 +68,12 @@ export function useAppSignInUserInfoLoader(): {
   };
 
   useEffect(() => {
-    if (userID === null || userName === null) {
+    if (userID == null || userName == null) {
       return;
     }
     setUserID(userID);
     setUserName(userName);
-  }, [userID, userName, setUserID, setUserName]);
+  }, [error, userID, userName, setUserID, setUserName]);
 
   return { load, isLoading, error };
 }
@@ -75,12 +81,20 @@ export function useAppSignInUserInfoLoader(): {
 export function useAppSignInUserInfoListener(): { isLoading: boolean } {
   const { accessToken } = useAppAccessToken();
 
-  const { load, isLoading } = useAppSignInUserInfoLoader();
+  const { load, isLoading, error } = useAppSignInUserInfoLoader();
 
   const { userID } = useAppSignInUserInfo();
 
+  // Nuke Invalid Access Token
+  const { removeAppAccessToken } = useRenRenOauthInfo();
   useEffect(() => {
-    if (isLoading || userID !== null) {
+    if (error) {
+      removeAppAccessToken();
+    }
+  }, [error, removeAppAccessToken]);
+
+  useEffect(() => {
+    if (isLoading || userID != null) {
       return;
     }
     load();

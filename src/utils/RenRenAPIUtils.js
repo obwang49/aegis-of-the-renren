@@ -96,8 +96,8 @@ export function useRenRenAPIRequest(
         setError(error);
         setIsLoading(false);
       })
-      .catch((error) => {
-        setError(error);
+      .catch((e) => {
+        setError(e);
         setIsLoading(false);
       });
   };
@@ -106,14 +106,14 @@ export function useRenRenAPIRequest(
 }
 
 function parseCORSProxyPayload(payload: mixed): { data: mixed, error: mixed } {
-  const { contents, status } = payload;
-  const { http_code } = status;
-
-  if (http_code !== 200) {
-    const error = { code: http_code };
-    return { data: null, error: error };
+  try {
+    const { contents } = payload;
+    const { response, error } = JSON.parse(contents);
+    if(error){
+      return { data: null, error: error };
+    }
+    return { data: response, error: null };
+  } catch {
+    return { data: null, error: new Error("UNKNOWN") };
   }
-
-  const { response } = JSON.parse(contents);
-  return { data: response, error: null };
 }

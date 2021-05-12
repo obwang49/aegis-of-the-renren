@@ -12,7 +12,7 @@ import { useAppBlogCount } from "./AppBlogUtils";
 import { useAppSignInUserInfo } from "./AppSignInUserUtils";
 import { useRenRenAPIProfileGet } from "./RenRenAPIProfileUtils";
 
-export function useAppProfileBlogCountLoader(): {
+function useAppProfileBlogCountLoader(): {
   load: () => void,
   isLoading: boolean,
   error: mixed,
@@ -34,7 +34,7 @@ export function useAppProfileBlogCountLoader(): {
   };
 
   useEffect(() => {
-    if (blogCount === null) {
+    if (blogCount == null) {
       return;
     }
     setBlogCount(blogCount);
@@ -51,7 +51,7 @@ export function useAppProfileBlogCountListener(): { isLoading: boolean } {
   const { blogCount } = useAppBlogCount();
 
   useEffect(() => {
-    if (isLoading || blogCount !== null) {
+    if (isLoading || blogCount != null) {
       return;
     }
     load();
