@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   group: {
     alignItems: "center",
     display: "flex",
+    flexWrap: "wrap"
   },
   item: {
     alignItems: "center",

@@ -96,8 +96,6 @@ export default function App() {
   const { isLoading: isSignInUserInfoLoading } = useAppSignInUserInfoListener();
   useAppProfileBlogCountListener();
 
-  console.log("!-!-!");
-
   return (
     <ThemeProvider theme={appTheme}>
       <Paper className={classes.page}>

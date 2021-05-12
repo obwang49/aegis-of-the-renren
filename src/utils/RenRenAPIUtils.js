@@ -88,8 +88,6 @@ export function useRenRenAPIRequest(
     setError(null);
     setIsLoading(true);
 
-    console.log("+++");
-
     fetch(requestURL, { method })
       .then((response) => response.json())
       .then((payload) => {
