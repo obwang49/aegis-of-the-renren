@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
+import { AppPathOption, useAppPath } from "../../utils/AppPathUtils";
 import { useAppSignInUserSignOut } from "../../utils/AppSignInUserUtils";
 
 const itemText = Object.freeze({
@@ -38,8 +39,11 @@ export default function NavBarAppSideDrawerLogOutItem({ onClose }: Props) {
 
   const { signOut: userSignOut } = useAppSignInUserSignOut();
 
+  const { setAppPath } = useAppPath();
+
   const signOut = () => {
     userSignOut();
+    setAppPath(AppPathOption.home);
     onClose();
   };
 

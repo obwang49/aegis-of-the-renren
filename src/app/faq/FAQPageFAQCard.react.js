@@ -9,15 +9,11 @@
 import type { FAQItem } from "./FAQPageFAQItems";
 
 import React from "react";
-import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import Collapse from "@material-ui/core/Collapse";
 import Divider from "@material-ui/core/Divider";
-import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
@@ -38,8 +34,6 @@ type Props = {
 };
 
 export default function FAQPageFAQCard({ faq }: Props) {
-  const theme = useTheme();
-
   const answerTextPrefixByLanguage = useValueByAppLanguage(answerTextPrefix);
   const questionTextPrefixByLanguage = useValueByAppLanguage(
     questionTextPrefix
@@ -48,11 +42,6 @@ export default function FAQPageFAQCard({ faq }: Props) {
   const { answerText, questionText } = faq;
   const answerTextByLanguage = useValueByAppLanguage(answerText);
   const questionTextByLanguage = useValueByAppLanguage(questionText);
-
-  const [isContentExpanded, setIsContentExpanded] = useState(false);
-  const toggleContentExpansion = () => {
-    setIsContentExpanded(!isContentExpanded);
-  };
 
   return (
     <Card>
@@ -69,19 +58,11 @@ export default function FAQPageFAQCard({ faq }: Props) {
         }
       />
       <Divider />
-      <CardActionArea onClick={toggleContentExpansion}>
-        <Collapse
-          in={isContentExpanded}
-          timeout="auto"
-          collapsedHeight={theme.spacing(5)}
-        >
-          <CardContent>
-            <Typography >
-              {`${answerTextPrefixByLanguage} ${answerTextByLanguage}`}
-            </Typography>
-          </CardContent>
-        </Collapse>
-      </CardActionArea>
+      <CardContent>
+        <Typography>
+          {`${answerTextPrefixByLanguage} ${answerTextByLanguage}`}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }

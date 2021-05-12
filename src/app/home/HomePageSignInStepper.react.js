@@ -20,8 +20,8 @@ const steps = Object.freeze({
     "成功后将会自动跳转回本页面",
   ],
   eng: [
-    "Click on the button at the bottom that will open the official sign in page " +
-      "of renren.com",
+    "Click on the button at the bottom that will open the official sign in " +
+      "page of renren.com",
     "Sign in to your personal account and confirm the authorization request",
     "Once authorized, you will be automatically redirected back to this page",
   ],

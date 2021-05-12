@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   cardBox: {
     marginBottom: theme.spacing(2),
     margin: theme.spacing(1),
-    width: theme.spacing(50),
+    maxWidth: theme.spacing(60),
   },
 }));
 

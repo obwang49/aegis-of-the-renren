@@ -15,12 +15,12 @@ import { faqItems } from "./FAQPageFAQItems";
 
 const useStyles = makeStyles((theme) => ({
   pageBox: {
-    display: "flex",
-    flexWrap: "wrap",
     padding: theme.spacing(2),
   },
   cardBox: {
+    marginBottom: theme.spacing(2),
     margin: theme.spacing(1),
+    maxWidth: theme.spacing(80),
   },
 }));
 

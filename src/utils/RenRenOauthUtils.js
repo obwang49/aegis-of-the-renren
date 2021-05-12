@@ -133,8 +133,7 @@ export function useRenRenOauthResponseListener(): void {
 
     const oauthInfo = parseRenRenOauthResponseURLHash(hash);
     setAppAccessToken(oauthInfo);
-
-    history.replace({ ...location, hash: "" });
+    history.replace({ hash: "" });
   }, [location, setAppAccessToken, history]);
 }
 
