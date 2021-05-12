@@ -17,11 +17,20 @@ import App from "./app/App.react";
 /**
  * External Dependencies
  *
+ * + Create React App
+ *   - @usage: App creation & bootstrapping
+ *   - @link: https://create-react-app.dev/
+ * + Gh Pages
+ *   - @usage: Github page publishing & deployment
+ *   - @link: https://www.npmjs.com/package/gh-pages
  * + Material-UI
  *   - @usage: UI framework & design system
  *   - @link: https://material-ui.com/
+ * + React
+ *   - @usage: UI framework & library
+ *   - @link: https://reactjs.org/
  * + React Cookie
- *   - @usage: browser cookie interaction
+ *   - @usage: browser cookie handling & interaction
  *   - @link: https://www.npmjs.com/package/react-cookie
  * + React HTML Parser
  *   - @usage: html text parsing & rendering
