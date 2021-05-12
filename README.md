@@ -44,3 +44,35 @@ The Millennials was said to own a shield that protected their renren.com account
 #### 问：为什么感觉 APP 页面加载的这么慢?
 
 答：再次强调，这个APP本质上是由Github提供服务的静态网页。因此加载时间完全取决与Github服务器连接到人人服务器需要多久。。。APP的角度并没有太多优化的空间。另外为了规避CORS限制，本APP还借道了公用CORS代理服务器，所以加载时间可能会长达约一分钟。还望您能耐心等待，谢谢！
+
+## References
++ RenRen Oauth 2.0
+  - @usage: RenRen oauthentication
+  - @link: http://open.renren.com/wiki/OAuth2.0
++ RenRen API 2.0
+  - @usage: RenRen data fetching 
+  - @link: http://open.renren.com/wiki/API2
++ Create React App
+  - @usage: App creation & bootstrapping
+  - @link: https://create-react-app.dev/
++ Gh Pages
+  - @usage: Github page publishing & deployment
+  - @link: https://www.npmjs.com/package/gh-pages
++ Material-UI
+  - @usage: UI framework & design system
+  - @link: https://material-ui.com/
++ React
+  - @usage: UI framework & library
+  - @link: https://reactjs.org/
++ React Cookie
+  - @usage: browser cookie handling & interaction
+  - @link: https://www.npmjs.com/package/react-cookie
++ React HTML Parser
+  - @usage: html text parsing & rendering
+  - @link: https://www.npmjs.com/package/react-html-parser
++ React Router
+  - @usage: browser rounting & navigation
+  - @link: https://reactrouter.com/
++ Recoil
+  - @usage: app state management & control
+  - @link: https://recoiljs.org/
