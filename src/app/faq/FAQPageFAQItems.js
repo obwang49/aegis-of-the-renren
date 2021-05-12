@@ -89,6 +89,38 @@ export const faqItems = Object.freeze({
   4: {
     answerText: {
       cn:
+        "是因为本APP与备份工具的工作原理有本质上的不同。" +
+        "从源代码和技术文档来看，备份工具应该是采用的网络爬虫的工作机制。" +
+        "所以自从人人网将日志页面404之后，自然就无法再抓取数据了。" +
+        "另外备份工具再登陆的处理上也比较激进，这里不是重点就不再赘述了。" +
+        "相比之下，本APP可以相当正统及规范了。因为APP完全依据人人官方技术文档，" +
+        "使用人人Oauth2.0和人人API2.0来完成相应的登录和数据请求。" +
+        "因此本APP才得以读取出采用爬虫手段无法获得的日志数据。",
+      eng:
+        "That is because the working mechanisms are fundamentally different " +
+        "between this APP and the backup tools. " +
+        "Based on the source code and technical document, the backup tools " +
+        "seems to be based on the web crawlers techniques. " +
+        "Therefore, after RenRen.con starts to 404 its blog pages, " +
+        "the backup tools can no longer fetch data by crawling. " +
+        "Besides, the backup tools seems to be taking a rather aggressive " +
+        "approach to handle the sign in process, " +
+        "which is not the real point here so will not dive deeper." +
+        "In comparission, this APP is far more standard and typical. " +
+        "Because this APP follows strickly the official documents provided " +
+        "by RenRen.com, and leverages the RenRen Oauth 2.0 as well as RenRen " +
+        "API 2. for sign in and data fetching respectively." +
+        "That is why this APP is able to access blog data that is not " +
+        "visible to backup tools based on web crawlers.",
+    },
+    questionText: {
+      cn: "为什么这个APP可以访问日志而备份工具却不行?",
+      eng: "Why this APP can access the blogs but the backup tools cannot?",
+    },
+  },
+  5: {
+    answerText: {
+      cn:
         "目前来看其他的功能，包括状态、相册等等，在人人官网上还是可以正常访问的，" +
         "所以暂时还不需要去担心太多。" +
         "另外如果需要一键备份的话，可以尝试使用下面列出的两个选项。" +
@@ -117,13 +149,13 @@ export const faqItems = Object.freeze({
       eng: "Why is the APP only for RenRen blogs?",
     },
   },
-  5: {
+  6: {
     answerText: {
       cn:
         "再次强调，这个APP本质上是由Github提供服务的静态网页。" +
         "因此加载时间完全取决与Github服务器连接到人人服务器需要多久。。。" +
         "从APP的角度并没有太多优化的空间。" +
-        "另外为了规避CORS限制，本APP还需借道公用CORS代理服务器，" +
+        "另外为了规避CORS限制，本APP还借道了公用CORS代理服务器，" +
         "所以加载时间可能会长达约一分钟。还望您能耐心等待，谢谢！",
       eng:
         "Once again, this APP itself is essentially a static page served by " +

@@ -21,12 +21,12 @@ import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 
 const answerTextPrefix = Object.freeze({
   cn: "答：",
-  eng: "A:",
+  eng: "A: ",
 });
 
 const questionTextPrefix = Object.freeze({
   cn: "问：",
-  eng: "Q:",
+  eng: "Q: ",
 });
 
 type Props = {
@@ -53,14 +53,14 @@ export default function FAQPageFAQCard({ faq }: Props) {
         }
         title={
           <Typography variant="h5" color="textSecondary">
-            {`${questionTextPrefixByLanguage} ${questionTextByLanguage}`}
+            {`${questionTextPrefixByLanguage}${questionTextByLanguage}`}
           </Typography>
         }
       />
       <Divider />
       <CardContent>
         <Typography>
-          {`${answerTextPrefixByLanguage} ${answerTextByLanguage}`}
+          {`${answerTextPrefixByLanguage}${answerTextByLanguage}`}
         </Typography>
       </CardContent>
     </Card>
