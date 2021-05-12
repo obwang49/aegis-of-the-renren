@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   page: {
     padding: theme.spacing(3),
   },
-  card: {
+  cardBox: {
     marginBottom: theme.spacing(2),
     maxWidth: theme.spacing(50),
   },
@@ -29,13 +29,13 @@ export default function ProfilePage() {
 
   return (
     <Box className={classes.page}>
-      <Box className={classes.card}>
+      <Box className={classes.cardBox}>
         <ProfilePageUserIDCard />
       </Box>
-      <Box className={classes.card}>
+      <Box className={classes.cardBox}>
         <ProfilePageUserNameCard />
       </Box>
-      <Box className={classes.card}>
+      <Box className={classes.cardBox}>
         <ProfilePageBlogCountCard />
       </Box>
     </Box>

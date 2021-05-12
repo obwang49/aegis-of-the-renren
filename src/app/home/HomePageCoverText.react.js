@@ -29,11 +29,11 @@ const CoverTextTypography = styled(Typography)({
 });
 
 const useStyles = makeStyles((theme) => ({
-  box: {
+  textBox: {
     marginLeft: theme.spacing(2),
     marginTop: theme.spacing(2),
   },
-  divider: {
+  dividerBox: {
     height: theme.spacing(2),
   },
 }));
@@ -45,11 +45,11 @@ export default function HomePageCoverText() {
   const coverTextBottomByLanguage = useValueByAppLanguage(coverTextBottom);
 
   return (
-    <Box className={classes.box}>
+    <Box className={classes.textBox}>
       <CoverTextTypography noWrap variant="h1">
         {coverTextTopByLanguage}
       </CoverTextTypography>
-      <Box className={classes.divider} />
+      <Box className={classes.dividerBox} />
       <CoverTextTypography noWrap variant="h1">
         {coverTextBottomByLanguage}
       </CoverTextTypography>

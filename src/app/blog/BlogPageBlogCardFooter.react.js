@@ -21,18 +21,18 @@ import BlogPageBlogCardFooterBlogShareCount from "./BlogPageBlogCardFooterBlogSh
 import BlogPageBlogCardFooterBlogViewCount from "./BlogPageBlogCardFooterBlogViewCount.react";
 
 const useStyles = makeStyles((theme) => ({
-  footer: {
+  footerBox: {
     alignItems: "center",
     display: "flex",
     flexGrow: "1",
     justifyContent: "space-between",
   },
-  group: {
+  groupBox: {
     alignItems: "center",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
-  item: {
+  itemBox: {
     alignItems: "center",
     display: "flex",
     margin: theme.spacing(1),
@@ -50,24 +50,24 @@ export default function BlogPageBlogCardFooter({ blog }: Props) {
 
   return (
     <CardActions>
-      <Box className={classes.footer}>
-        <Box className={classes.group}>
-          <Box className={classes.item}>
+      <Box className={classes.footerBox}>
+        <Box className={classes.groupBox}>
+          <Box className={classes.itemBox}>
             <BlogPageBlogCardFooterBlogAccessControl blog={blog} />
           </Box>
           <Divider orientation="vertical" flexItem />
-          <Box className={classes.item}>
+          <Box className={classes.itemBox}>
             <BlogPageBlogCardFooterBlogCreateTime blog={blog} />
           </Box>
         </Box>
-        <Box className={classes.group}>
-          <Box className={classes.item}>
+        <Box className={classes.groupBox}>
+          <Box className={classes.itemBox}>
             <BlogPageBlogCardFooterBlogViewCount blog={blog} />
           </Box>
-          <Box className={classes.item}>
+          <Box className={classes.itemBox}>
             <BlogPageBlogCardFooterBlogCommentCount blog={blog} />
           </Box>
-          <Box className={classes.item}>
+          <Box className={classes.itemBox}>
             <BlogPageBlogCardFooterBlogShareCount blog={blog} />
           </Box>
         </Box>

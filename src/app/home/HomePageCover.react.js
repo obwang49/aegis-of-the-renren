@@ -16,19 +16,19 @@ import { APP_THEME_PALETTE_PRIMARY_MAIN } from "../App.react";
 import cover from "../../assets/cover.png";
 
 const useStyles = makeStyles((theme) => ({
-  cover: {
+  coverBox: {
     height: "100%",
     position: "absolute",
     top: "0",
     width: "100%",
   },
-  image: {
+  imageBox: {
     backgroundImage: `url(${cover})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
   },
-  shade: {
+  shadeBox: {
     backgroundColor: `${APP_THEME_PALETTE_PRIMARY_MAIN}44`,
   },
 }));
@@ -38,8 +38,8 @@ export default function HomePageCover() {
 
   return (
     <>
-      <Box className={combineClasses([classes.cover, classes.image])} />
-      <Box className={combineClasses([classes.cover, classes.shade])} />
+      <Box className={combineClasses([classes.coverBox, classes.imageBox])} />
+      <Box className={combineClasses([classes.coverBox, classes.shadeBox])} />
     </>
   );
 }

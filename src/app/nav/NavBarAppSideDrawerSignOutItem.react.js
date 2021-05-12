@@ -44,7 +44,7 @@ export default function NavBarAppSideDrawerLogOutItem({ onClose }: Props) {
   };
 
   return (
-    <ListItem button className={classes.toolbar} onClick={signOut}>
+    <ListItem button className={classes.listItem} onClick={signOut}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>

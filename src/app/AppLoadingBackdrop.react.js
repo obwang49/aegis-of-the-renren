@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.tooltip + 1,
   },
-  box: {
+  textBox: {
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
@@ -47,7 +47,7 @@ export default function AppLoadingBackdrop({ isLoading }: Props) {
   return (
     <Backdrop className={classes.backdrop} open={isLoading}>
       <BoxNoUserDragOrSelect>
-        <Box className={classes.box}>
+        <Box className={classes.textBox}>
           <CircularProgress color="inherit" />
           <Typography className={classes.backdropText}>
             {backdropTextByLanguage}

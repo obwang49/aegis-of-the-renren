@@ -53,7 +53,7 @@ export const appThemeTypographyFontFamily = Object.freeze({
 });
 
 const useStyles = makeStyles((theme) => ({
-  page: {
+  pagePaper: {
     minHeight: "100vh",
   },
 }));
@@ -98,7 +98,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={appTheme}>
-      <Paper className={classes.page}>
+      <Paper className={classes.pagePaper}>
         <NavBar />
         {appPage}
         <AppLoadingBackdrop isLoading={isSignInUserInfoLoading} />

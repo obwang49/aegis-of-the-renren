@@ -21,10 +21,10 @@ import NavBarLogo from "./NavBarLogo.react";
 import NavBarTitle from "./NavBarTitle.react";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
+  titleBox: {
     flexGrow: 1,
   },
-  item: {
+  itemBox: {
     marginLeft: theme.spacing(1),
   },
 }));
@@ -37,16 +37,16 @@ export default function NavBar() {
       <BoxNoUserDragOrSelect>
         <Toolbar>
           <NavBarLogo />
-          <Box className={combineClasses([classes.title, classes.item])}>
+          <Box className={combineClasses([classes.titleBox, classes.itemBox])}>
             <NavBarTitle />
           </Box>
-          <Box className={classes.item}>
+          <Box className={classes.itemBox}>
             <NavBarAppLanguageMenu />
           </Box>
-          <Box className={classes.item}>
+          <Box className={classes.itemBox}>
             <NavBarAppThemeModeButton />
           </Box>
-          <Box className={classes.item}>
+          <Box className={classes.itemBox}>
             <NavBarAppSideDrawer />
           </Box>
         </Toolbar>

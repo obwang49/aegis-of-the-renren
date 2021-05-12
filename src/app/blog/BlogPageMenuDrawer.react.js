@@ -25,7 +25,7 @@ const pageSizeLabelText = Object.freeze({
 });
 
 const useStyles = makeStyles((theme) => ({
-  drawer: {
+  drawerBox: {
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
@@ -62,7 +62,7 @@ export default function BlogPageMenuDrawer({ loadPage }: Props) {
 
   return (
     <Drawer anchor="bottom" variant="permanent">
-      <Box className={classes.drawer}>
+      <Box className={classes.drawerBox}>
         <TablePagination
           component="div"
           count={blogCount}

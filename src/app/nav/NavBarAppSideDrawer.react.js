@@ -34,9 +34,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
-  toolbar: {
-    ...theme.mixins.toolbar,
-  },
 }));
 
 export default function NavBarAppSideDrawer() {

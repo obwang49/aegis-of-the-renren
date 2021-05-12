@@ -21,13 +21,13 @@ import BlogPageMenuDrawer from "./BlogPageMenuDrawer.react";
 import BlogPageNoBlogCard from "./BlogPageNoBlogCard.react";
 
 const useStyles = makeStyles((theme) => ({
-  page: {
+  pageBox: {
     display: "flex",
     flexDirection: "column",
     padding: theme.spacing(2),
     paddingBottom: theme.spacing(8),
   },
-  card: {
+  cardBox: {
     margin: theme.spacing(1),
   },
 }));
@@ -41,11 +41,15 @@ export default function BlogPage() {
 
   const renderBlogs = () => {
     if (!isLoading && blogCount === 0) {
-      return <BlogPageNoBlogCard />;
+      return (
+        <Box className={classes.cardBox}>
+          <BlogPageNoBlogCard />
+        </Box>
+      );
     }
 
     return blogList?.map((blog, index) => (
-      <Box className={classes.card} key={index}>
+      <Box className={classes.cardBox} key={index}>
         <BlogPageBlogCard blog={blog} index={index} />
       </Box>
     ));
@@ -53,7 +57,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <Box className={classes.page}>{renderBlogs()}</Box>
+      <Box className={classes.pageBox}>{renderBlogs()}</Box>
       <BlogPageMenuDrawer />
       <AppLoadingBackdrop isLoading={isLoading} />
     </>

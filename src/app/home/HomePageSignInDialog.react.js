@@ -32,7 +32,7 @@ const summaryText = Object.freeze({
 });
 
 const useStyles = makeStyles((theme) => ({
-  actions: {
+  dialogActions: {
     justifyContent: "center",
   },
 }));
@@ -56,7 +56,7 @@ export default function HomePageSignInDialog({ isOpen, onClose }: Props) {
           <DialogContentText>{summaryTextByLanguage}</DialogContentText>
           <HomePageSignInStepper />
         </DialogContent>
-        <DialogActions classes={{ root: classes.actions }}>
+        <DialogActions classes={{ root: classes.dialogActions }}>
           <HomePageSignInRenRenButton />
         </DialogActions>
       </BoxNoUserDragOrSelect>

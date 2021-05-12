@@ -45,7 +45,7 @@ export default function NavBarAppSideDrawerSignInItem({
   };
 
   return (
-    <ListItem button className={classes.toolbar} onClick={signIn}>
+    <ListItem button className={classes.listItem} onClick={signIn}>
       <ListItemIcon>
         <AccountCircleIcon />
       </ListItemIcon>

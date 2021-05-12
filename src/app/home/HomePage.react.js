@@ -18,10 +18,10 @@ import HomePageSignInButton from "./HomePageSignInButton.react";
 import HomePageSignInDialog from "./HomePageSignInDialog.react";
 
 const useStyles = makeStyles((theme) => ({
-  body: {
+  bodyBox: {
     position: "relative",
   },
-  signInButton: {
+  signInButtonBox: {
     bottom: "calc( 25vh - 10vw )",
     display: "flex",
     left: "0",
@@ -42,10 +42,10 @@ export default function HomePage() {
   return (
     <BoxNoUserDragOrSelect>
       <HomePageCover />
-      <Box className={classes.body}>
+      <Box className={classes.bodyBox}>
         <HomePageCoverText />
       </Box>
-      <Box className={classes.signInButton}>
+      <Box className={classes.signInButtonBox}>
         <HomePageSignInButton onClick={toggleSignInDiaglog} />
       </Box>
       <HomePageSignInDialog
