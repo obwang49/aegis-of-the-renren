@@ -18,6 +18,7 @@ import { useAppTheme } from "../utils/AppStylesUtils";
 import { useAppThemeModeSyncer } from "../utils/AppThemeModeUtils";
 import { useRenRenOauthResponseListener } from "../utils/RenRenOauthUtils";
 import BlogPage from "./blog/BlogPage.react";
+import FAQPage from "./faq/FAQPage.react";
 import HomePage from "./home/HomePage.react";
 import NavBar from "./nav/NavBar.react";
 import ProfilePage from "./profile/ProfilePage.react";
@@ -38,7 +39,7 @@ export default function App() {
 
   const appPage = useValueByAppPath({
     blog: <BlogPage />,
-    faq: <h1>Aegis Of The FAQ</h1>,
+    faq: <FAQPage />,
     home: <HomePage />,
     profile: <ProfilePage />,
   });

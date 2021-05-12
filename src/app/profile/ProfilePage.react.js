@@ -15,12 +15,13 @@ import ProfilePageUserIDCard from "./ProfilePageUserIDCard.react";
 import ProfilePageUserNameCard from "./ProfilePageUserNameCard.react";
 
 const useStyles = makeStyles((theme) => ({
-  page: {
-    padding: theme.spacing(3),
+  pageBox: {
+    padding: theme.spacing(2),
   },
   cardBox: {
     marginBottom: theme.spacing(2),
-    maxWidth: theme.spacing(50),
+    margin: theme.spacing(1),
+    width: theme.spacing(50),
   },
 }));
 
@@ -28,7 +29,7 @@ export default function ProfilePage() {
   const classes = useStyles();
 
   return (
-    <Box className={classes.page}>
+    <Box className={classes.pageBox}>
       <Box className={classes.cardBox}>
         <ProfilePageUserIDCard />
       </Box>
