@@ -7,26 +7,15 @@
  */
 
 import React from "react";
-import { cyan, deepOrange } from "@material-ui/core/colors";
-import {
-  createMuiTheme,
-  makeStyles,
-  responsiveFontSizes,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 
 import { useAppAccessTokenSyncer } from "../utils/AppAccessTokenUtils";
-import {
-  useAppLanguageSyncer,
-  useValueByAppLanguage,
-} from "../utils/AppLanguageUtils";
+import { useAppLanguageSyncer } from "../utils/AppLanguageUtils";
 import { useAppPathSyncer, useValueByAppPath } from "../utils/AppPathUtils";
 import { useAppProfileBlogCountListener } from "../utils/AppProfileUtils";
 import { useAppSignInUserInfoListener } from "../utils/AppSignInUserUtils";
-import {
-  useAppThemeMode,
-  useAppThemeModeSyncer,
-} from "../utils/AppThemeModeUtils";
+import { useAppTheme } from "../utils/AppStylesUtils";
+import { useAppThemeModeSyncer } from "../utils/AppThemeModeUtils";
 import { useRenRenOauthResponseListener } from "../utils/RenRenOauthUtils";
 import BlogPage from "./blog/BlogPage.react";
 import HomePage from "./home/HomePage.react";
@@ -35,22 +24,6 @@ import ProfilePage from "./profile/ProfilePage.react";
 import AppLoadingBackdrop from "./AppLoadingBackdrop.react";
 
 import Paper from "@material-ui/core/Paper";
-
-export const APP_THEME_PALETTE_PRIMARY_MAIN = cyan[900];
-export const appThemeBase = Object.freeze({
-  palette: {
-    primary: { main: APP_THEME_PALETTE_PRIMARY_MAIN, dark: "#121212" },
-    secondary: deepOrange,
-    type: "",
-  },
-  typography: {
-    fontFamily: "",
-  },
-});
-export const appThemeTypographyFontFamily = Object.freeze({
-  cn: "ZCOOL KuaiLe",
-  eng: "Carter One",
-});
 
 const useStyles = makeStyles((theme) => ({
   pagePaper: {
@@ -61,23 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
   const classes = useStyles();
 
-  const appFontFamilyByLanguage = useValueByAppLanguage(
-    appThemeTypographyFontFamily
-  );
-  const { appThemeMode } = useAppThemeMode();
-  const appTheme = responsiveFontSizes(
-    createMuiTheme({
-      ...appThemeBase,
-      palette: {
-        ...appThemeBase.palette,
-        type: appThemeMode,
-      },
-      typography: {
-        ...appThemeBase.typography,
-        fontFamily: appFontFamilyByLanguage,
-      },
-    })
-  );
+  const { appTheme } = useAppTheme();
 
   const appPage = useValueByAppPath({
     blog: <BlogPage />,

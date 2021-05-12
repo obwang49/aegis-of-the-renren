@@ -10,8 +10,10 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { combineClasses } from "../../utils/AppStylesUtils";
-import { APP_THEME_PALETTE_PRIMARY_MAIN } from "../App.react";
+import {
+  APP_THEME_PALETTE_PRIMARY_MAIN,
+  combineClasses,
+} from "../../utils/AppStylesUtils";
 
 import cover from "../../assets/cover.png";
 

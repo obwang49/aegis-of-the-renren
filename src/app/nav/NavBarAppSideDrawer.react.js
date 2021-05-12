@@ -11,6 +11,7 @@ import { useState } from "react";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 import Zoom from "@material-ui/core/Zoom";
@@ -20,6 +21,8 @@ import { useValueByAppLanguage } from "../../utils/AppLanguageUtils";
 import { AppPathOption, useAppPath } from "../../utils/AppPathUtils";
 import BoxNoUserDragOrSelect from "../common/BoxNoUserDragOrSelect.react";
 import HomePageSignInDialog from "../home/HomePageSignInDialog.react";
+import NavBarAppSideDrawerEmailLinkItem from "./NavBarAppSideDrawerEmailLinkItem.react";
+import NavBarAppSideDrawerGithubLinkItem from "./NavBarAppSideDrawerGithubLinkItem.react";
 import NavBarAppSideDrawerPageList from "./NavBarAppSideDrawerPageList.react";
 import NavBarAppSideDrawerSignInItem from "./NavBarAppSideDrawerSignInItem.react";
 import NavBarAppSideDrawerSignOutItem from "./NavBarAppSideDrawerSignOutItem.react";
@@ -83,6 +86,11 @@ export default function NavBarAppSideDrawer() {
           )}
           <Divider />
           <NavBarAppSideDrawerPageList onClose={toggleDrawer} />
+          <Divider />
+          <List>
+            <NavBarAppSideDrawerGithubLinkItem onClose={toggleDrawer} />
+            <NavBarAppSideDrawerEmailLinkItem onClose={toggleDrawer} />
+          </List>
         </BoxNoUserDragOrSelect>
       </Drawer>
       <HomePageSignInDialog
