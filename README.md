@@ -4,6 +4,9 @@ The Millennials was said to own a shield that protected their renren.com account
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+
+:warning: [05/2021] 人人网近期进行了网站升级改版，“我的应用”页面也处于404状态。本网页基于的应用之前已经提交了审核，然而现在也不知道会怎么样了，所以实际是处于无法使用的状态。只是通过我自己的账号暂时还可以访问日志数据，说明人人API目前还没有变动，等哪天通过了审核再来更新。
+
 # 人人之守护
 
 > 允许用户浏览自己人人网账号已发布的日志内容。朝花夕拾，一如年少摸样。
